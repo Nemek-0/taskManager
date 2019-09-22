@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='ToubunNoHanayome'>
+    <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint"/>
+
+    <extend-configuration-property name="gin.ginjector.modules"
+                                   value="ru.nemek.client.gin.ClientModule"/>
+
+    <source path="client"/>
+    <source path="shared"/>
+</module>
