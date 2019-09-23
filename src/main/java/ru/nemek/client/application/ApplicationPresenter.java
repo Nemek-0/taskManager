@@ -13,6 +13,8 @@ import ru.nemek.client.place.NameTokens;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
 
+    public static final NestedSlot SLOT_APPLICATION = new NestedSlot();
+
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
     }
 
@@ -20,8 +22,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @ProxyStandard
     interface MyProxy extends ProxyPlace<ApplicationPresenter> {
     }
-
-    public static final NestedSlot SLOT_APPLICATION = new NestedSlot();
 
     @Inject
     ApplicationPresenter(
@@ -31,6 +31,11 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         super(eventBus, view, proxy, RevealType.Root);
 
         getView().setUiHandlers(this);
+    }
+
+    @Override
+    public void sendName(String text) {
+
     }
 
 }

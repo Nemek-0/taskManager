@@ -36,7 +36,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <slf4j.version>1.7.25</slf4j.version>
-    <lombok.version>1.16.12</lombok.version>
+    <lombok.version>1.16.18</lombok.version>
 
     <!--Не настроенно -->
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
