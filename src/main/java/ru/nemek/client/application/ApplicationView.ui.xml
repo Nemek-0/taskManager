@@ -3,9 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
     <g:HTMLPanel>
-        <g:SimplePanel ui:field="main"/>
-        <g:TextBox ui:field="nameField"/>
-        <g:Button ui:field="button">Кнопочка</g:Button>
+        <g:Button ui:field="googleButton">Google in</g:Button>
     </g:HTMLPanel>
 
 </ui:UiBinder>

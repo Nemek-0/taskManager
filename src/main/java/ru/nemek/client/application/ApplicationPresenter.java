@@ -1,5 +1,6 @@
 package ru.nemek.client.application;
 
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -8,6 +9,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.place.NameTokens;
 
@@ -16,6 +18,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     public static final NestedSlot SLOT_APPLICATION = new NestedSlot();
 
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
+        void isLogin(Boolean isLogin);
     }
 
     @NameToken(NameTokens.HOME)
@@ -23,19 +26,27 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     interface MyProxy extends ProxyPlace<ApplicationPresenter> {
     }
 
+    private final PlaceManager placeManager;
+
     @Inject
     ApplicationPresenter(
             EventBus eventBus,
             MyView view,
+            PlaceManager placeManager,
             MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
-
+        this.placeManager = placeManager;
         getView().setUiHandlers(this);
     }
 
     @Override
-    public void sendName(String text) {
+    public void GoogleButton() {
+        Window.Location.replace("/AuthServlet");
+    }
 
+    @Override
+    protected void onReveal() {
+        super.onReveal();
     }
 
 }

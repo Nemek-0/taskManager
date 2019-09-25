@@ -1,7 +1,6 @@
 package ru.nemek.client.application;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -19,27 +18,22 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     }
 
     @UiField
-    SimplePanel main;
-    @UiField
-    Button button;
-    @UiField
-    TextBox nameField;
-
+    Button googleButton;
 
     @Inject
     ApplicationView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-
-        bindSlot(ApplicationPresenter.SLOT_APPLICATION, main);
-
-        this.button.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                nameField.setText("");
-            }
-        });
     }
 
 
+    @UiHandler("googleButton")
+    public void GoogleButton(ClickEvent eventfirst) {
+        getUiHandlers().GoogleButton();
+    }
 
+    public void isLogin(Boolean isLogin) {
+        if(isLogin){
+            googleButton.setVisible(false);
+        }
+    }
 }
