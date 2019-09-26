@@ -71,7 +71,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         dialogBox.setWidget(dialogContents);
 
         // Add a close button at the bottom of the dialog
-        Button closeButton = new Button();
+        Button closeButton = new Button("Кнопка");
         closeButton.addClickHandler(clickEvent -> dialogBox.hide());
         dialogContents.add(closeButton);
 
