@@ -20,17 +20,25 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     FlexTable flexTable = new FlexTable();
     @UiField
     Button newTaskButton;
+    @UiField
+    DialogBox dialogBox;
 
     @Inject
     ApplicationView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         initFlexTable();
+        dialogBox = createDialogBox();
     }
 
 
     @UiHandler("googleButton")
     public void GoogleButton(ClickEvent eventfirst) {
         getUiHandlers().GoogleButton();
+    }
+    @UiHandler("newTaskButton")
+    public void showDialogBox(ClickEvent event){
+        dialogBox.center();
+        dialogBox.show();
     }
 
     public void isLogin(Boolean isLogin) {
@@ -51,6 +59,24 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         flexTable.setText(0,0,"Done?");
         flexTable.setText(0,1,"Task");
         flexTable.setText(0,2,"Due");
+    }
+
+    private DialogBox createDialogBox(){
+        DialogBox dialogBox = new DialogBox();
+        dialogBox.ensureDebugId("dialogBox");
+
+        // Create a table to layout the content
+        VerticalPanel dialogContents = new VerticalPanel();
+        dialogContents.setSpacing(4);
+        dialogBox.setWidget(dialogContents);
+
+        // Add a close button at the bottom of the dialog
+        Button closeButton = new Button();
+        closeButton.addClickHandler(clickEvent -> dialogBox.hide());
+        dialogContents.add(closeButton);
+
+        // Return the dialog box
+        return dialogBox;
     }
 
 }
