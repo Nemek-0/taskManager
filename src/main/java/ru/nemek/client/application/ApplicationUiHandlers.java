@@ -6,6 +6,4 @@ import ru.nemek.shared.dto.Task;
 interface ApplicationUiHandlers extends UiHandlers {
 
     void GoogleButton();
-    void initFlexTable();
-    void addTaskToFlexTable(Task task);
 }

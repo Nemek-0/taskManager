@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.place.NameTokens;
 
@@ -22,9 +23,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
         void isLogin(Boolean isLogin);
-        void setFlexTable(FlexTable flexTable);
-        FlexTable getFlexTable();
-
     }
 
     @NameToken(NameTokens.HOME)
@@ -32,13 +30,16 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     interface MyProxy extends ProxyPlace<ApplicationPresenter> {
     }
 
+    private final PlaceManager placeManager;
 
     @Inject
     ApplicationPresenter(
             EventBus eventBus,
             MyView view,
-            MyProxy proxy) {
+            MyProxy proxy,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy, RevealType.Root);
+        this.placeManager = placeManager;
         getView().setUiHandlers(this);
     }
 
@@ -52,22 +53,4 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         super.onReveal();
     }
 
-    @Override
-    public void initFlexTable() {
-        FlexTable flexTable = getView().getFlexTable();
-        flexTable.setText(0,0,"Done?");
-        flexTable.setText(0,1,"task");
-        flexTable.setText(0,2,"Due");
-        getView().setFlexTable(flexTable);
-    }
-
-    @Override
-    public void addTaskToFlexTable(Task task) {
-        FlexTable flexTable = getView().getFlexTable();
-        int row = flexTable.getRowCount();
-        flexTable.setWidget(row, 0, new CheckBox());
-        flexTable.setText(row, 1, task.getTask());
-        flexTable.setText(row,2,task.getDue().toString());
-        getView().setFlexTable(flexTable);
-    }
 }

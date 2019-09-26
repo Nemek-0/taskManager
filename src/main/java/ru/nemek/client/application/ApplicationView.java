@@ -16,7 +16,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 
     @UiField
     Button googleButton;
-    @UiField
+    @UiField(provided = true)
     FlexTable flexTable = new FlexTable();
     @UiField
     Button newTaskButton;
@@ -24,7 +24,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     @Inject
     ApplicationView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-        getUiHandlers().initFlexTable();
+        initFlexTable();
     }
 
 
@@ -46,4 +46,11 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     public void setFlexTable(FlexTable flexTable) {
         this.flexTable = flexTable;
     }
+
+    private void initFlexTable() {
+        flexTable.setText(0,0,"Done?");
+        flexTable.setText(0,1,"Task");
+        flexTable.setText(0,2,"Due");
+    }
+
 }
