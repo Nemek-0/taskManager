@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="exampleGTWP:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>exampleGTWP</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ToubunNoHanayome-1.0.war">
+      <element id="artifact" artifact-name="exampleGTWP:war exploded" />
+    </root>
+  </artifact>
+</component>
