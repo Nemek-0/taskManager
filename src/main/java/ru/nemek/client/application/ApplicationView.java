@@ -1,11 +1,16 @@
 package ru.nemek.client.application;
 
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.datepicker.client.DatePicker;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import ru.nemek.shared.dto.Task;
+import sun.security.krb5.internal.crypto.CksumType;
 
 import javax.inject.Inject;
 
@@ -17,7 +22,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     @UiField
     Button googleButton;
     @UiField(provided = true)
-    FlexTable flexTable = new FlexTable();
+    FlexTable taskTable = new FlexTable();
     @UiField
     Button newTaskButton;
     @UiField
@@ -48,17 +53,17 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     }
 
     public FlexTable getFlexTable() {
-        return flexTable;
+        return taskTable;
     }
 
     public void setFlexTable(FlexTable flexTable) {
-        this.flexTable = flexTable;
+        this.taskTable = flexTable;
     }
 
     private void initFlexTable() {
-        flexTable.setText(0,0,"Done?");
-        flexTable.setText(0,1,"Task");
-        flexTable.setText(0,2,"Due");
+       taskTable.setText(0,0,"Done?");
+       taskTable.setText(0,1,"Task");
+       taskTable.setText(0,2,"Due");
     }
 
     private DialogBox createDialogBox(){
@@ -70,8 +75,26 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         dialogContents.setSpacing(4);
         dialogBox.setWidget(dialogContents);
 
+        HTML details = new HTML();
+        dialogContents.add(details);
+        dialogContents.setCellHorizontalAlignment(
+                details, HasHorizontalAlignment.ALIGN_CENTER);
+
+        TextBox taskBox = new TextBox();
+        DatePicker dueBox = new DatePicker();
+        dialogContents.add(taskBox);
+        dialogContents.add(dueBox);
+
         // Add a close button at the bottom of the dialog
-        Button closeButton = new Button("Кнопка");
+        Button saveButton = new Button("Сохранить");
+        saveButton.addClickHandler(clickEvent -> {
+            getUiHandlers().addTask(taskBox.getText(), dueBox.getValue());
+            //сохраняем в таблицу
+            dialogBox.hide();
+        });
+        dialogContents.add(saveButton);
+
+        Button closeButton = new Button("Отмена");
         closeButton.addClickHandler(clickEvent -> dialogBox.hide());
         dialogContents.add(closeButton);
 
@@ -79,4 +102,13 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         return dialogBox;
     }
 
+
+    public void addTask(Task task){
+        int row = taskTable.getRowCount();
+        CheckBox checkBox = new CheckBox();
+        checkBox.addValueChangeHandler(valueChangeEvent -> taskTable.removeRow(row));
+        this.taskTable.setWidget(row, 0, new CheckBox());
+        this.taskTable.setText(row, 1, task.getTask());
+        this.taskTable.setText(row, 2, task.getDue().toString());
+    }
 }

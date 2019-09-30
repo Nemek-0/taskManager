@@ -17,12 +17,15 @@ import ru.nemek.client.place.NameTokens;
 
 import ru.nemek.shared.dto.Task;
 
+import java.util.Date;
+
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
 
     public static final NestedSlot SLOT_APPLICATION = new NestedSlot();
 
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
         void isLogin(Boolean isLogin);
+        void addTask(Task task);
     }
 
     @NameToken(NameTokens.HOME)
@@ -46,6 +49,14 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Override
     public void GoogleButton() {
         Window.Location.replace("/AuthServlet");
+    }
+
+    @Override
+    public void addTask(String stringTask, Date due) {
+        //здесь нужно сохранять значение в бд, а потом обновлять таблицу
+        //но пока так
+        Task task = new Task(stringTask, due);
+        getView().addTask(task);
     }
 
     @Override

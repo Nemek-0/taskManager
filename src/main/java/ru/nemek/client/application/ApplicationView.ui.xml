@@ -3,10 +3,9 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
     <g:HTMLPanel>
-
+        <g:FlexTable ui:field="taskTable"/>
         <g:Button ui:field="newTaskButton">New task</g:Button>
         <g:Button ui:field="googleButton">Google in</g:Button>
-        <g:FlexTable ui:field="flexTable"/>
         <g:DialogBox ui:field="dialogBox"/>
     </g:HTMLPanel>
 
