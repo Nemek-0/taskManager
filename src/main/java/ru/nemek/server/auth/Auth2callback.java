@@ -38,7 +38,7 @@ public class Auth2callback extends HttpServlet {
     }
 
 
-    //@Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = req.getParameter("code");//Получаем параметр code из get ответа гугла
 

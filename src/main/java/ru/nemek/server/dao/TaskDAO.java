@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface TaskDAO {
     Task getById(int id);
-    void save();
-    void update();
-    void delete();
+    void save(Task task);
+    void update(Task task);
+    void delete(Task task);
     List<Task> getAll();
 
 }

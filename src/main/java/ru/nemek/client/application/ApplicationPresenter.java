@@ -1,8 +1,6 @@
 package ru.nemek.client.application;
 
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -15,9 +13,12 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.place.NameTokens;
 
+import ru.nemek.server.dao.TaskDAO;
+import ru.nemek.server.dao.TaskDAOImpl;
 import ru.nemek.shared.dto.Task;
 
 import java.util.Date;
+import java.util.List;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
 
@@ -26,6 +27,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
         void isLogin(Boolean isLogin);
         void addTask(Task task);
+
     }
 
     @NameToken(NameTokens.HOME)
@@ -56,7 +58,14 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         //здесь нужно сохранять значение в бд, а потом обновлять таблицу
         //но пока так
         Task task = new Task(stringTask, due);
-        getView().addTask(task);
+        TaskDAO taskDAO = new TaskDAOImpl();
+        taskDAO.save(task);
+        updateTable();
+    }
+
+    public List<Task> updateTable() {
+        TaskDAO taskDAO = new TaskDAOImpl();
+        return taskDAO.getAll();
     }
 
     @Override

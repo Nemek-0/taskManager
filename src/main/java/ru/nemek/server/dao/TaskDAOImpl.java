@@ -4,6 +4,7 @@ package ru.nemek.server.dao;
 import ru.nemek.shared.dto.Task;
 
 import java.util.List;
+import static ru.nemek.server.dao.objectify.OfyService.ofy;
 
 public class TaskDAOImpl implements TaskDAO {
 
@@ -13,22 +14,23 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public void save() {
+    public void save(Task task) {
+        ofy().save().entity(task);
+    }
+
+    @Override
+    public void update(Task task) {
 
     }
 
     @Override
-    public void update() {
+    public void delete(Task task) {
 
     }
 
-    @Override
-    public void delete() {
-
-    }
 
     @Override
-    public List<Task> getAll() {
-        return null;
+    public List getAll() {
+        return ofy().load().list();
     }
 }

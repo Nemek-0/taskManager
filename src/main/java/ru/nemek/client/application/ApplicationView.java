@@ -10,9 +10,9 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import ru.nemek.shared.dto.Task;
-import sun.security.krb5.internal.crypto.CksumType;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
@@ -89,8 +89,9 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         Button saveButton = new Button("Сохранить");
         saveButton.addClickHandler(clickEvent -> {
             getUiHandlers().addTask(taskBox.getText(), dueBox.getValue());
-            //сохраняем в таблицу
+            taskBox.setText("");
             dialogBox.hide();
+            updateTable();
         });
         dialogContents.add(saveButton);
 
@@ -111,4 +112,12 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         this.taskTable.setText(row, 1, task.getTask());
         this.taskTable.setText(row, 2, task.getDue().toString());
     }
+
+    private void updateTable(){
+        for(Task task: getUiHandlers().updateTable()){
+            addTask(task);
+        }
+
+    }
+
 }

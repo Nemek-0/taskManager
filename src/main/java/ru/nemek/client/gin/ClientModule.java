@@ -1,11 +1,13 @@
 package ru.nemek.client.gin;
 
 
+import com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 import ru.nemek.client.application.ApplicationModule;
 import ru.nemek.client.place.NameTokens;
+import ru.nemek.client.resources.ResourceLoader;
 
 
 public class ClientModule extends AbstractPresenterModule {
@@ -18,6 +20,9 @@ public class ClientModule extends AbstractPresenterModule {
                 .unauthorizedPlace(NameTokens.HOME)
                 .build());
 
+        install(new RpcDispatchAsyncModule());
         install(new ApplicationModule());
+
+        bind(ResourceLoader.class).asEagerSingleton();
     }
 }
