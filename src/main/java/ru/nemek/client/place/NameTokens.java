@@ -11,13 +11,13 @@ package ru.nemek.client.place;
  */
 public class NameTokens {
     public static final String HOME = "/";
-    public static final String SECONDPAGE = "/page-2";
+    public static final String history = "/history";
 
     public static String getHOME() {
         return HOME;
     }
 
-    public static String getSECONDPAGE() {
-        return SECONDPAGE;
+    public static String getHistory() {
+        return history;
     }
 }

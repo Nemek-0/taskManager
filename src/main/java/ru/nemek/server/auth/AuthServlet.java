@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AuthServlet extends Auth2callback {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logininGoogle(resp);
 
-        resp.sendRedirect("/");
     }
 }
