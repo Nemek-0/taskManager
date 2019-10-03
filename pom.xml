@@ -108,7 +108,7 @@
           <logLevel>INFO</logLevel>
 
           <runTarget>index.html</runTarget>
-          <module>ru.nemek.ToubunNoHanayome</module>
+          <module>ru.nemek.TaskManager</module>
 
           <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
           <appEngineVersion>${gae.version}</appEngineVersion>
