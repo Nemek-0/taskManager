@@ -9,6 +9,6 @@ public interface TaskDAO {
     void save(Task task);
     void update(Task task);
     void delete(Task task);
-    List<Task> getAll();
+    List getAll();
 
 }

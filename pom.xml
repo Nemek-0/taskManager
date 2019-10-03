@@ -6,10 +6,10 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.nemek</groupId>
-  <artifactId>ToubunNoHanayome</artifactId>
+  <artifactId>TaskManager</artifactId>
   <packaging>war</packaging>
   <version>1.0</version>
-  <name>5 Toubun No Hanayome</name>
+  <name>Task Manager</name>
 
   <properties>
     <!-- client -->
@@ -146,7 +146,7 @@
     <dependency>
       <groupId>com.gwtplatform</groupId>
       <artifactId>gwtp-all</artifactId>
-      <version>1.6</version>
+      <version>${gwtp.version}</version>
     </dependency>
 
 
@@ -237,22 +237,12 @@
 
   <!-- MY -->
   <dependency>
-    <groupId>com.google.api</groupId>
-    <artifactId>gwt-oauth2</artifactId>
-    <version>0.2</version>
-  </dependency>
-
-  <dependency>
     <groupId>com.googlecode.objectify</groupId>
     <artifactId>objectify</artifactId>
     <version>5.1.21</version>
   </dependency>
 
-  <dependency>
-    <groupId>com.google.api-client</groupId>
-    <artifactId>google-api-client</artifactId>
-    <version>1.21.0</version>
-  </dependency>
+
 
   <!-- GwtBootstrap3 -->
   <dependency>

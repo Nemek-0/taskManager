@@ -57,16 +57,14 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     public void addTask(String stringTask, Date due) {
         //здесь нужно сохранять значение в бд, а потом обновлять таблицу
         //но пока так
-        Task task = new Task(stringTask, due);
-        TaskDAO taskDAO = new TaskDAOImpl();
-        taskDAO.save(task);
-        updateTable();
+
     }
 
+    @Override
     public List<Task> updateTable() {
-        TaskDAO taskDAO = new TaskDAOImpl();
-        return taskDAO.getAll();
+        return null;
     }
+
 
     @Override
     protected void onReveal() {

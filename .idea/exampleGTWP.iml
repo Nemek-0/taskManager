@@ -27,7 +27,7 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/target/ToubunNoHanayome-1.0/WEB-INF/classes" />
+    <output url="file://$MODULE_DIR$/target/TaskManager-1.0/WEB-INF/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
@@ -139,11 +139,11 @@
     <orderEntry type="library" name="Maven: com.google.api:gwt-oauth2:0.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.objectify:objectify:5.1.21" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
+    <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3:0.9.4" level="project" />
+    <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3-extras:0.9.4" level="project" />
     <orderEntry type="library" name="Maven: com.google.api-client:google-api-client:1.30.3" level="project" />
     <orderEntry type="library" name="Maven: com.google.http-client:google-http-client-jackson2:1.32.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" level="project" />
-    <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3:0.9.4" level="project" />
-    <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3-extras:0.9.4" level="project" />
     <orderEntry type="library" name="Maven: com.google.api:api-common:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.oauth-client:google-oauth-client:1.21.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.http-client:google-http-client:1.21.0" level="project" />

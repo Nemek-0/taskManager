@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="exampleGTWP:war exploded">
-    <output-path>$PROJECT_DIR$/target/ToubunNoHanayome-1.0</output-path>
+    <output-path>$PROJECT_DIR$/target/TaskManager-1.0</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -102,11 +102,11 @@
           <element id="library" level="project" name="Maven: com.google.api:gwt-oauth2:0.2" />
           <element id="library" level="project" name="Maven: com.googlecode.objectify:objectify:5.1.21" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:20.0" />
+          <element id="library" level="project" name="Maven: org.gwtbootstrap3:gwtbootstrap3:0.9.4" />
+          <element id="library" level="project" name="Maven: org.gwtbootstrap3:gwtbootstrap3-extras:0.9.4" />
           <element id="library" level="project" name="Maven: com.google.api-client:google-api-client:1.30.3" />
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client-jackson2:1.32.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" />
-          <element id="library" level="project" name="Maven: org.gwtbootstrap3:gwtbootstrap3:0.9.4" />
-          <element id="library" level="project" name="Maven: org.gwtbootstrap3:gwtbootstrap3-extras:0.9.4" />
           <element id="library" level="project" name="Maven: com.google.api:api-common:1.7.0" />
           <element id="library" level="project" name="Maven: com.google.oauth-client:google-oauth-client:1.21.0" />
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client:1.21.0" />
@@ -168,7 +168,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/ToubunNoHanayome-1.0/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/TaskManager-1.0/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="exampleGTWP/web/Web" />
       <element id="gwt-compiler-output" facet="exampleGTWP/gwt/GWT" />
