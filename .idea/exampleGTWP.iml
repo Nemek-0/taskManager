@@ -136,11 +136,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.google.appengine:appengine-api-labs:1.9.71" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.appengine:appengine-api-stubs:1.9.71" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.appengine:appengine-testing:1.9.71" level="project" />
-    <orderEntry type="library" name="Maven: com.google.api:gwt-oauth2:0.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.objectify:objectify:5.1.21" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3:0.9.4" level="project" />
     <orderEntry type="library" name="Maven: org.gwtbootstrap3:gwtbootstrap3-extras:0.9.4" level="project" />
+    <orderEntry type="library" name="Maven: com.google.api:gwt-oauth2:0.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.api-client:google-api-client:1.30.3" level="project" />
     <orderEntry type="library" name="Maven: com.google.http-client:google-http-client-jackson2:1.32.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" level="project" />

@@ -1,14 +1,21 @@
 package ru.nemek.server.dao.objectify;
 
+import com.google.appengine.api.datastore.ReadPolicy.Consistency;
+import com.google.inject.Inject;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import ru.nemek.shared.dto.Task;
 
 public class OfyService {
-    static {
-        ObjectifyService.register(Task.class);
+    @Inject
+    public static void setObjectifyFactory(OfyFactory factory) {
+        ObjectifyService.setFactory(factory);
     }
-    public static Objectify ofy(){
-        return ObjectifyService.ofy();
+
+    public static Objectify ofy() {
+        return ObjectifyService.ofy().consistency(Consistency.STRONG);
+    }
+
+    public static OfyFactory factory() {
+        return (OfyFactory) ObjectifyService.factory();
     }
 }

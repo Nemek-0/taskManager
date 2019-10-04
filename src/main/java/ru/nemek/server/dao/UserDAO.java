@@ -1,6 +1,5 @@
 package ru.nemek.server.dao;
 
-import ru.nemek.shared.dto.Task;
 import ru.nemek.shared.dto.User;
 
 import java.util.List;

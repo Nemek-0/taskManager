@@ -2,12 +2,10 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:npui="urn:import:ru.nemek.client.application.ui">
-
     <g:HTMLPanel>
-        <g:FlexTable ui:field="taskTable"/>
-        <g:Button ui:field="newTaskButton">New task</g:Button>
-        <g:Button ui:field="googleButton">Google in</g:Button>
-        <g:DialogBox ui:field="dialogBox"/>
+        <p>
+            history
+        </p>
     </g:HTMLPanel>
 
 </ui:UiBinder>

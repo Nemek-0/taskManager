@@ -2,14 +2,14 @@ package ru.nemek.shared.dto;
 
 import java.util.Date;
 
-public class Task extends Dto {
+public class TaskDTO extends Dto {
     private String task;
     private Date due;
 
-    public Task() {
+    public TaskDTO() {
     }
 
-    public Task(String task, Date due){
+    public TaskDTO(String task, Date due){
         this.task = task;
         this.due = due;
     }

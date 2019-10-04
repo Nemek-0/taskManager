@@ -14,7 +14,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
  */
 public class NameTokens {
     public static final String HOME = "/";
-    public static final String history = "/history";
+    public static final String history = "history";
 
     public static String getHOME() {
         return HOME;

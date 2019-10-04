@@ -10,7 +10,7 @@
                 <a href="{nameTokens.getHOME}">Home</a>
             </li>
             <li>
-                <a href="{nameTokens.getHistory}">History</a>
+                <a href="#{nameTokens.getHistory}">History</a>
             </li>
         </ul>
     </g:HTMLPanel>

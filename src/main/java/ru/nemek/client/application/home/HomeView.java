@@ -7,7 +7,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import ru.nemek.shared.dto.Task;
+import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
 
@@ -100,7 +100,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
 
 
-    public void addTask(Task task){
+    public void addTask(TaskDTO task){
         int row = taskTable.getRowCount();
         CheckBox checkBox = new CheckBox();
         checkBox.addValueChangeHandler(valueChangeEvent -> taskTable.removeRow(row));
@@ -110,7 +110,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
 
     private void updateTable(){
-        for(Task task: getUiHandlers().updateTable()){
+        for(TaskDTO task: getUiHandlers().updateTable()){
             addTask(task);
         }
 
