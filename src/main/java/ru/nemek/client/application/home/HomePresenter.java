@@ -13,8 +13,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
 import ru.nemek.client.place.NameTokens;
-import ru.nemek.server.dispatch.common.getTasks;
-import ru.nemek.shared.dispatch.FetchTaskResult;
 import ru.nemek.shared.dto.TaskDTO;
 
 import java.util.ArrayList;
@@ -56,13 +54,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public List<TaskDTO> updateTable() {
-        List<TaskDTO> tasks = new ArrayList<>();
-        dispatcher.execute(new FetchTaskResult(), new AsyncCallbackImpl<getTasks>() {
-            @Override
-            public void onSuccess(getTasks getTasks) {
 
-            }
-        });
         return null;
     }
 

@@ -6,7 +6,7 @@ import ru.nemek.shared.entity.Task;
 import java.util.List;
 
 public interface TaskDAO {
-    Task getById(int id);
+    TaskDTO getById(int id);
     void save(TaskDTO task);
     void update(TaskDTO task);
     void delete(TaskDTO task);
