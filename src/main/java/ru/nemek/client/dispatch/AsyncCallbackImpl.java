@@ -23,8 +23,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * Global RPC onFailure System
  */
 public abstract class AsyncCallbackImpl<T> implements AsyncCallback<T> {
-    @Override
+
     public void onFailure(Throwable caught) {
         Window.alert("Communication to the server has failed.");
     }
+    public void onSuccess(T result) {
+        onCustomSuccess(result);
+    }
+
+    protected abstract void onCustomSuccess(T result);
 }

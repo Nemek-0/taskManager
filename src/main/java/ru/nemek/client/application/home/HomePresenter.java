@@ -13,9 +13,12 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
 import ru.nemek.client.place.NameTokens;
+import ru.nemek.shared.dispatch.addTaskAction;
+import ru.nemek.shared.dispatch.addTaskResult;
+import ru.nemek.shared.dispatch.getTasksAction;
+import ru.nemek.shared.dispatch.getTasksResult;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
         void isLogin(Boolean isLogin);
         void addTask(TaskDTO task);
+        void updateTable(List<TaskDTO> tasks);
     }
 
     @ProxyCodeSplit
@@ -49,13 +53,30 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     public void addTask(String stringTask, Date due) {
         //здесь нужно сохранять значение в бд, а потом обновлять таблицу
         //но пока так
+        TaskDTO task = new TaskDTO(stringTask, due);
+        dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
+
+            @Override
+            protected void onCustomSuccess(addTaskResult result) {
+
+            }
+        });
 
     }
 
     @Override
-    public List<TaskDTO> updateTable() {
+    public void updateTable() {
+        dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
+            @Override
+            public void onSuccess(getTasksResult result) {
+                getView().updateTable(result.getTasks());
+            }
 
-        return null;
+            @Override
+            protected void onCustomSuccess(getTasksResult result) {
+
+            }
+        });
     }
 
 

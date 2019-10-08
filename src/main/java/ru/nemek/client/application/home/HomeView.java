@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -87,7 +88,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             getUiHandlers().addTask(taskBox.getText(), dueBox.getValue());
             taskBox.setText("");
             dialogBox.hide();
-            updateTable();
+            getUiHandlers().updateTable();
         });
         dialogContents.add(saveButton);
 
@@ -109,8 +110,8 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         this.taskTable.setText(row, 2, task.getDue().toString());
     }
 
-    private void updateTable(){
-        for(TaskDTO task: getUiHandlers().updateTable()){
+    public void updateTable(List<TaskDTO> tasks){
+        for(TaskDTO task: tasks){
             addTask(task);
         }
 
