@@ -8,17 +8,17 @@ import ru.nemek.server.dispatch.MyAbstractActionHandler;
 import ru.nemek.shared.dispatch.addTaskAction;
 import ru.nemek.shared.dispatch.addTaskResult;
 
-public class saveTaskHandller extends MyAbstractActionHandler<addTaskAction, addTaskResult> {
+public class addTaskHandller extends MyAbstractActionHandler<addTaskAction, addTaskResult> {
     private TaskDAO taskDAO;
 
     @Inject
-    public saveTaskHandller() {
+    public addTaskHandller() {
         super(addTaskAction.class);
     }
 
     @Override
     public addTaskResult execute(addTaskAction action, ExecutionContext context) throws ActionException {
-        System.out.println("LOg");
+        System.out.println(action.getTask());
         taskDAO.save(action.getTask());
         return new addTaskResult();
     }

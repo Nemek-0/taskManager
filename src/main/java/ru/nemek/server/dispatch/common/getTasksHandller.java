@@ -20,7 +20,7 @@ public class getTasksHandller extends MyAbstractActionHandler<getTasksAction, ge
 
     @Override
     public getTasksResult execute(getTasksAction action, ExecutionContext context) throws ActionException {
-
+        System.out.println(taskDAO.getAll().size());
         return new getTasksResult(taskDAO.getAll());
     }
 }

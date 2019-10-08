@@ -3,6 +3,7 @@ package ru.nemek.server.dao;
 
 import ru.nemek.shared.dto.TaskDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import static ru.nemek.server.dao.objectify.OfyService.ofy;
 
@@ -30,7 +31,12 @@ public class TaskDAOImpl implements TaskDAO {
 
 
     @Override
-    public List getAll() {
-        return ofy().load().list();
+    public List<TaskDTO> getAll() {
+        List objects = ofy().load().list();
+        List<TaskDTO> tasks = new ArrayList<TaskDTO>();
+        for (Object task :  objects){
+            tasks.add((TaskDTO) task);
+        }
+        return tasks;
     }
 }

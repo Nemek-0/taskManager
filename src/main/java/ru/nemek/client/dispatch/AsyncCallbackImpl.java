@@ -27,9 +27,5 @@ public abstract class AsyncCallbackImpl<T> implements AsyncCallback<T> {
     public void onFailure(Throwable caught) {
         Window.alert("Communication to the server has failed.");
     }
-    public void onSuccess(T result) {
-        onCustomSuccess(result);
-    }
 
-    protected abstract void onCustomSuccess(T result);
 }

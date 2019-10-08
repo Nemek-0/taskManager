@@ -3,6 +3,7 @@ package ru.nemek.server.dao.objectify;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.googlecode.objectify.ObjectifyFactory;
+import ru.nemek.shared.dto.TaskDTO;
 
 public class OfyFactory extends ObjectifyFactory{
     private Injector injector;
@@ -10,6 +11,7 @@ public class OfyFactory extends ObjectifyFactory{
     @Inject
     public OfyFactory(Injector injector) {
         this.injector = injector;
+        this.register(TaskDTO.class);
     }
 
     @Override

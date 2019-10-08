@@ -51,13 +51,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public void addTask(String stringTask, Date due) {
-        //здесь нужно сохранять значение в бд, а потом обновлять таблицу
-        //но пока так
         TaskDTO task = new TaskDTO(stringTask, due);
         dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
-
             @Override
-            protected void onCustomSuccess(addTaskResult result) {
+            public void onSuccess(addTaskResult addTaskResult) {
 
             }
         });
@@ -70,11 +67,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             @Override
             public void onSuccess(getTasksResult result) {
                 getView().updateTable(result.getTasks());
-            }
-
-            @Override
-            protected void onCustomSuccess(getTasksResult result) {
-
             }
         });
     }

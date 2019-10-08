@@ -1,7 +1,12 @@
 package ru.nemek.shared.dto;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
+
 import java.util.Date;
 
+@Index
+@Entity
 public class TaskDTO extends Dto {
     private String task;
     private Date due;
@@ -28,5 +33,13 @@ public class TaskDTO extends Dto {
 
     public void setDue(Date due) {
         this.due = due;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskDTO{" +
+                "task='" + task + '\'' +
+                ", due=" + due +
+                '}';
     }
 }
