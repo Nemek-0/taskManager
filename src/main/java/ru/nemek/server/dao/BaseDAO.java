@@ -11,6 +11,10 @@ public abstract class BaseDAO<T> {
         this.clazz = clazz;
     }
 
+
+    public void save(T entity){
+        ofy().save().entity(entity).now();
+    }
     public List<T> getAll() {
         return ofy().load().type(clazz).list();
     }

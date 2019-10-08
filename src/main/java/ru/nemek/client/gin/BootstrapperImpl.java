@@ -20,9 +20,7 @@ public class BootstrapperImpl implements Bootstrapper {
         this.eventBus = eventBus;
     }
 
-
     @Override
     public void onBootstrap() {
-
     }
 }

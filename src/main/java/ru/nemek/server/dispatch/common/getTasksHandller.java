@@ -2,15 +2,16 @@ package ru.nemek.server.dispatch.common;
 
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
-import ru.nemek.server.dao.TaskDAO;
+import com.gwtplatform.dispatch.shared.ActionException;
+import ru.nemek.server.dao.BaseDAO;
+import ru.nemek.server.dispatch.MyAbstractActionHandler;
 import ru.nemek.shared.dispatch.getTasksAction;
 import ru.nemek.shared.dispatch.getTasksResult;
-import com.gwtplatform.dispatch.shared.ActionException;
-import ru.nemek.server.dispatch.MyAbstractActionHandler;
+import ru.nemek.shared.dto.TaskDTO;
 
 
 public class getTasksHandller extends MyAbstractActionHandler<getTasksAction, getTasksResult> {
-    private TaskDAO taskDAO;
+    private BaseDAO<TaskDTO> taskDAO;
 
     @Inject
     public getTasksHandller() {

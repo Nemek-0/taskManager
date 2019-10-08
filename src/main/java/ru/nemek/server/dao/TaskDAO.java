@@ -1,15 +1,17 @@
 package ru.nemek.server.dao;
 
 import ru.nemek.shared.dto.TaskDTO;
-import ru.nemek.shared.entity.Task;
 
-import java.util.List;
+import static ru.nemek.server.dao.objectify.OfyService.ofy;
 
-public interface TaskDAO {
-    TaskDTO getById(int id);
-    void save(TaskDTO task);
-    void update(TaskDTO task);
-    void delete(TaskDTO task);
-    List getAll();
+public class TaskDAO extends BaseDAO<TaskDTO> {
+    public TaskDAO() {
+        super(TaskDTO.class);
+    }
+
+    public void save (TaskDTO task){
+        ofy().save().entity(task).now();
+    }
+
 
 }
