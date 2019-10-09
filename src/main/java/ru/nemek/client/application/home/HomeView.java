@@ -85,10 +85,11 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         // Add a close button at the bottom of the dialog
         Button saveButton = new Button("Сохранить");
         saveButton.addClickHandler(clickEvent -> {
-            getUiHandlers().addTask(taskBox.getText(), dueBox.getValue());
+            TaskDTO task = new TaskDTO(taskBox.getText(), dueBox.getValue());
+            getUiHandlers().addTask(task);
             taskBox.setText("");
             dialogBox.hide();
-            getUiHandlers().updateTable();
+            getUiHandlers().addTaskTable(task.getId());
         });
         dialogContents.add(saveButton);
 

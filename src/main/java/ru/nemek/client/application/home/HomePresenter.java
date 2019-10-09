@@ -13,13 +13,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
 import ru.nemek.client.place.NameTokens;
-import ru.nemek.shared.dispatch.addTaskAction;
-import ru.nemek.shared.dispatch.addTaskResult;
-import ru.nemek.shared.dispatch.getTasksAction;
-import ru.nemek.shared.dispatch.getTasksResult;
+import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -50,12 +46,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void addTask(String stringTask, Date due) {
-        TaskDTO task = new TaskDTO(stringTask, due);
+    public void addTask(TaskDTO task) {
         dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
             @Override
             public void onSuccess(addTaskResult addTaskResult) {
-
             }
         });
 
@@ -67,6 +61,16 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             @Override
             public void onSuccess(getTasksResult result) {
                 getView().updateTable(result.getTasks());
+            }
+        });
+    }
+
+    @Override
+    public void addTaskTable(long id){
+        dispatcher.execute(new getTaskAction(id), new AsyncCallbackImpl<getTaskResult>() {
+            @Override
+            public void onSuccess(getTaskResult getTaskResult) {
+                getView().addTask(getTaskResult.getTasks());
             }
         });
     }
