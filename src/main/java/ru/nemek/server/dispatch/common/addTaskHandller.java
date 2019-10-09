@@ -17,7 +17,6 @@ public class addTaskHandller extends MyAbstractActionHandler<addTaskAction, addT
 
     @Override
     public addTaskResult execute(addTaskAction action, ExecutionContext context) throws ActionException {
-        System.out.println(action.getTask());
         new TaskDAO().save(action.getTask());
         return new addTaskResult();
     }

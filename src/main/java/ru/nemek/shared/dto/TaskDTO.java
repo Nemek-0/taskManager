@@ -1,33 +1,21 @@
 package ru.nemek.shared.dto;
 
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
-public class TaskDTO implements Serializable {
-    @Id
-    private Long id;
+public class TaskDTO extends Dto {
     private String task;
     private Date due;
-
-    public TaskDTO() {
-    }
 
     public TaskDTO(String task, Date due){
         this.task = task;
         this.due = due;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TaskDTO() {
     }
 
     public String getTask() {

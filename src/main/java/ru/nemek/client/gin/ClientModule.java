@@ -7,7 +7,7 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 import ru.nemek.client.application.ApplicationModule;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.client.resources.ResourceLoader;
-
+import ru.nemek.shared.dto.TaskDTO;
 
 
 public class ClientModule extends AbstractPresenterModule {
@@ -23,5 +23,7 @@ public class ClientModule extends AbstractPresenterModule {
         install(new ApplicationModule());
 
         bind(ResourceLoader.class).asEagerSingleton();
+        bind(TaskDTO.class).asEagerSingleton();
+
     }
 }

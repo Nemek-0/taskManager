@@ -9,6 +9,10 @@ public class Dto implements IsSerializable, Serializable {
     @Id
     private Long id;
 
+    protected Dto() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -16,4 +20,6 @@ public class Dto implements IsSerializable, Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }
