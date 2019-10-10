@@ -20,4 +20,8 @@ public class TaskDAO extends BaseDAO<TaskDTO> {
     public TaskDTO getTaskById(long id){
         return this.get(id);
     }
+
+    public TaskDTO saveTaskAndReturn(TaskDTO task){
+        return this.saveAndReturn(task);
+    }
 }

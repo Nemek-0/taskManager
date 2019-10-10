@@ -16,6 +16,7 @@ import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -46,13 +47,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void addTask(TaskDTO task) {
+    public void addTask(String taskString, Date due) {
+        TaskDTO task = new TaskDTO(taskString, due);
         dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
             @Override
             public void onSuccess(addTaskResult addTaskResult) {
+                addTaskTable(addTaskResult.getResult().getId());
             }
         });
-
     }
 
     @Override
@@ -60,7 +62,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
             @Override
             public void onSuccess(getTasksResult result) {
-                getView().updateTable(result.getTasks());
+                for(TaskDTO task : result.getTasks()){
+                    getView().addTask(task);
+                }
             }
         });
     }

@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 
@@ -78,18 +79,16 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
                 details, HasHorizontalAlignment.ALIGN_CENTER);
 
         TextBox taskBox = new TextBox();
-        DatePicker dueBox = new DatePicker();
+        DatePicker dateBox = new DatePicker();
         dialogContents.add(taskBox);
-        dialogContents.add(dueBox);
+        dialogContents.add(dateBox);
 
         // Add a close button at the bottom of the dialog
         Button saveButton = new Button("Сохранить");
         saveButton.addClickHandler(clickEvent -> {
-            TaskDTO task = new TaskDTO(taskBox.getText(), dueBox.getValue());
-            getUiHandlers().addTask(task);
+            newTask(taskBox.getText(), dateBox.getValue());
             taskBox.setText("");
             dialogBox.hide();
-            getUiHandlers().addTaskTable(task.getId());
         });
         dialogContents.add(saveButton);
 
@@ -116,5 +115,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             addTask(task);
         }
 
+    }
+
+    private void newTask(String taskString, Date due){
+        getUiHandlers().addTask(taskString, due);
     }
 }

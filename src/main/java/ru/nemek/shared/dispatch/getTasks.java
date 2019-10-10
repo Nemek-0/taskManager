@@ -10,7 +10,6 @@ import java.util.List;
 @GenDispatch(isSecure = false, serviceName = UnsecuredActionImpl.DEFAULT_SERVICE_NAME)
 public class getTasks {
 
-
     @Out(1)
     List<TaskDTO> tasks;
 }

@@ -10,12 +10,13 @@ public class TaskDTO extends Dto {
     private String task;
     private Date due;
 
+
+    public TaskDTO() {
+    }
+
     public TaskDTO(String task, Date due){
         this.task = task;
         this.due = due;
-    }
-
-    public TaskDTO() {
     }
 
     public String getTask() {

@@ -7,6 +7,7 @@ import ru.nemek.server.dao.TaskDAO;
 import ru.nemek.server.dispatch.MyAbstractActionHandler;
 import ru.nemek.shared.dispatch.addTaskAction;
 import ru.nemek.shared.dispatch.addTaskResult;
+import ru.nemek.shared.dto.TaskDTO;
 
 public class addTaskHandller extends MyAbstractActionHandler<addTaskAction, addTaskResult> {
 
@@ -17,7 +18,8 @@ public class addTaskHandller extends MyAbstractActionHandler<addTaskAction, addT
 
     @Override
     public addTaskResult execute(addTaskAction action, ExecutionContext context) throws ActionException {
-        new TaskDAO().save(action.getTask());
-        return new addTaskResult();
+
+        TaskDTO task = new TaskDAO().saveTaskAndReturn(action.getTask());
+        return new addTaskResult(task);
     }
 }

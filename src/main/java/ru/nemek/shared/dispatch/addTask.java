@@ -10,4 +10,7 @@ import ru.nemek.shared.dto.TaskDTO;
 public class addTask {
     @In(1)
     TaskDTO task;
+
+    @Out(1)
+    TaskDTO result;
 }
