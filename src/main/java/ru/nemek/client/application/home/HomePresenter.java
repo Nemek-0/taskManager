@@ -16,15 +16,16 @@ import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers {
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
         void isLogin(Boolean isLogin);
         void addTask(TaskDTO task);
-        void updateTable(List<TaskDTO> tasks);
+        void updateTable(ArrayList<TaskDTO> tasks);
+        void setTextBox(String str);
     }
 
     @ProxyCodeSplit
@@ -38,8 +39,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_APPLICATION);
         this.dispatcher = dispatcher;
         getView().setUiHandlers(this);
+        dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
+            @Override
+            public void onSuccess(getTasksResult result) {
+                getView().setTextBox(result.getTasks().toString());
+                getView().updateTable(result.getTasks());
+            }
+        });
     }
-
 
     @Override
     public void GoogleButton() {
@@ -62,9 +69,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
             @Override
             public void onSuccess(getTasksResult result) {
-                for(TaskDTO task : result.getTasks()){
-                    getView().addTask(task);
-                }
+            getView().updateTable(result.getTasks());
             }
         });
     }
@@ -79,11 +84,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         });
     }
 
-
     @Override
     protected void onReveal() {
         super.onReveal();
+
     }
-
-
 }

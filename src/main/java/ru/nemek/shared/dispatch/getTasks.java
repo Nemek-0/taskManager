@@ -5,11 +5,11 @@ import com.gwtplatform.dispatch.annotation.Out;
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @GenDispatch(isSecure = false, serviceName = UnsecuredActionImpl.DEFAULT_SERVICE_NAME)
 public class getTasks {
 
     @Out(1)
-    List<TaskDTO> tasks;
+    ArrayList<TaskDTO> tasks;
 }

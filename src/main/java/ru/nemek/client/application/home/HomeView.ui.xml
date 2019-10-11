@@ -8,6 +8,7 @@
         <g:Button ui:field="newTaskButton">New task</g:Button>
         <g:Button ui:field="googleButton">Google in</g:Button>
         <g:DialogBox ui:field="dialogBox"/>
+        <g:TextBox ui:field="textBox"/>
     </g:HTMLPanel>
 
 </ui:UiBinder>

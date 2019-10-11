@@ -10,8 +10,8 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -20,12 +20,14 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
     @UiField
     Button googleButton;
-    @UiField(provided = true)
+    @UiField
     FlexTable taskTable = new FlexTable();
     @UiField
     Button newTaskButton;
     @UiField
     DialogBox dialogBox;
+    @UiField
+    TextBox textBox;
 
     @Inject
     HomeView(Binder uiBinder) {
@@ -103,21 +105,22 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
     public void addTask(TaskDTO task){
         int row = taskTable.getRowCount();
-        CheckBox checkBox = new CheckBox();
-        checkBox.addValueChangeHandler(valueChangeEvent -> taskTable.removeRow(row));
         this.taskTable.setWidget(row, 0, new CheckBox());
         this.taskTable.setText(row, 1, task.getTask());
         this.taskTable.setText(row, 2, task.getDue().toString());
     }
 
-    public void updateTable(List<TaskDTO> tasks){
+    public void updateTable(ArrayList<TaskDTO> tasks){
         for(TaskDTO task: tasks){
             addTask(task);
         }
-
     }
 
     private void newTask(String taskString, Date due){
         getUiHandlers().addTask(taskString, due);
+    }
+
+    public void setTextBox(String str){
+        this.textBox.setText(str);
     }
 }

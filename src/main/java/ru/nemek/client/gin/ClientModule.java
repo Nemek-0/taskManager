@@ -9,6 +9,8 @@ import ru.nemek.client.place.NameTokens;
 import ru.nemek.client.resources.ResourceLoader;
 import ru.nemek.shared.dto.TaskDTO;
 
+import java.util.ArrayList;
+
 
 public class ClientModule extends AbstractPresenterModule {
     @Override
@@ -24,6 +26,7 @@ public class ClientModule extends AbstractPresenterModule {
 
         bind(ResourceLoader.class).asEagerSingleton();
         bind(TaskDTO.class).asEagerSingleton();
+        bind(ArrayList.class).asEagerSingleton();
 
     }
 }

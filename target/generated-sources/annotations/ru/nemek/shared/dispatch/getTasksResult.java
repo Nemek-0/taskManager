@@ -6,17 +6,17 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 
 public class getTasksResult implements Result { 
 
-  java.util.List<ru.nemek.shared.dto.TaskDTO> tasks;
+  java.util.ArrayList<ru.nemek.shared.dto.TaskDTO> tasks;
 
   protected getTasksResult() {
     // Possibly for serialization.
   }
 
-  public getTasksResult(java.util.List<ru.nemek.shared.dto.TaskDTO> tasks) {
+  public getTasksResult(java.util.ArrayList<ru.nemek.shared.dto.TaskDTO> tasks) {
     this.tasks = tasks;
   }
 
-  public java.util.List<ru.nemek.shared.dto.TaskDTO> getTasks(){
+  public java.util.ArrayList<ru.nemek.shared.dto.TaskDTO> getTasks(){
     return tasks;
   }
 

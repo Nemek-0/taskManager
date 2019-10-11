@@ -2,7 +2,7 @@ package ru.nemek.server.dao;
 
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TaskDAO extends BaseDAO<TaskDTO> {
     public TaskDAO() {
@@ -13,7 +13,7 @@ public class TaskDAO extends BaseDAO<TaskDTO> {
        this.save(task);
     }
 
-    public List<TaskDTO> getTasks(){
+    public ArrayList<TaskDTO> getTasks(){
         return this.getAll();
     }
 

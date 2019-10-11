@@ -17,8 +17,6 @@ public class getTaskHandller extends MyAbstractActionHandler<getTaskAction, getT
 
     @Override
     public getTaskResult execute(getTaskAction action, ExecutionContext context) throws ActionException {
-        System.out.println(action.getId());
-        System.out.println(new TaskDAO().get(action.getId()));
         return new getTaskResult(new TaskDAO().get(action.getId()));
     }
 }

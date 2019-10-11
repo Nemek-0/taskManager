@@ -11,6 +11,7 @@ public class TaskDTO extends Dto {
     private Date due;
 
 
+
     public TaskDTO() {
     }
 

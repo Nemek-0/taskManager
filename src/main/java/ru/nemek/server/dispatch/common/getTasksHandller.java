@@ -9,7 +9,7 @@ import ru.nemek.shared.dispatch.getTasksAction;
 import ru.nemek.shared.dispatch.getTasksResult;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class getTasksHandller extends MyAbstractActionHandler<getTasksAction, getTasksResult> {
@@ -22,8 +22,8 @@ public class getTasksHandller extends MyAbstractActionHandler<getTasksAction, ge
 
     @Override
     public getTasksResult execute(getTasksAction action, ExecutionContext context) throws ActionException {
-        List<TaskDTO> lsit = new TaskDAO().getAll();
-        System.out.println(lsit);
-        return new getTasksResult(lsit);
+        ArrayList<TaskDTO> list =  new TaskDAO().getAll();
+        System.out.println(list);
+        return new getTasksResult(list);
     }
 }
