@@ -108,10 +108,17 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         this.taskTable.setWidget(row, 0, new CheckBox());
         this.taskTable.setText(row, 1, task.getTask());
         this.taskTable.setText(row, 2, task.getDue().toString());
+
+    }
+
+    public void addTask(TaskDTO task, int row){
+        this.taskTable.setWidget(row, 0, new CheckBox());
+        this.taskTable.setText(row, 1, task.getTask());
+        this.taskTable.setText(row, 2, task.getDue().toString());
     }
 
     public void updateTable(ArrayList<TaskDTO> tasks){
-        for(TaskDTO task: tasks){
+        for(TaskDTO task : tasks){
             addTask(task);
         }
     }

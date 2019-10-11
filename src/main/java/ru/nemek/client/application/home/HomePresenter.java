@@ -26,6 +26,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         void addTask(TaskDTO task);
         void updateTable(ArrayList<TaskDTO> tasks);
         void setTextBox(String str);
+        void addTask(TaskDTO task, int row);
     }
 
     @ProxyCodeSplit
@@ -42,8 +43,13 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
             @Override
             public void onSuccess(getTasksResult result) {
-                getView().setTextBox(result.getTasks().toString());
-                getView().updateTable(result.getTasks());
+
+                ArrayList<TaskDTO> tasks = result.getTasks();
+                String str = tasks.toString();
+                for(int i = 0; i < tasks.size(); i++){
+                    getView().addTask(tasks.get(i), i + 1);
+                }
+                getView().setTextBox(str);
             }
         });
     }
@@ -87,6 +93,5 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     @Override
     protected void onReveal() {
         super.onReveal();
-
     }
 }
