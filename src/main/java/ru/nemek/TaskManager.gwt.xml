@@ -11,6 +11,7 @@
                                    value="ru.nemek.client.gin.ClientModule"/>
 
 
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
     <!-- Пакеты с расширениями .client и .shared определены в конфигурационном файле
     .gwt.xml тегом <source> для компиляции в JavaScript-код -->
     <source path='client'/>
