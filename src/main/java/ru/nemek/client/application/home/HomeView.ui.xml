@@ -4,9 +4,11 @@
              xmlns:npui="urn:import:ru.nemek.client.application.ui">
 
     <g:HTMLPanel>
-        <npui:MainMenu/>
-        <g:SimplePanel ui:field="mainContentPanel"/>
+        <g:FlexTable ui:field="taskTable"/>
+        <g:Button ui:field="newTaskButton">New task</g:Button>
+        <g:Button ui:field="googleButton">Google in</g:Button>
+        <g:DialogBox ui:field="dialogBox"/>
+        <g:TextBox ui:field="textBox"/>
     </g:HTMLPanel>
-
 
 </ui:UiBinder>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='TaskManager'>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name='com.gwtplatform.dispatch.Dispatch'/>
+    <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint"/>
+
+    <!-- Тег <extend-configuration-property> с помощью атрибутов name и value расширяет значение
+    ранее определенного конфигурационного свойства. -->
+    <extend-configuration-property name="gin.ginjector.modules"
+                                   value="ru.nemek.client.gin.ClientModule"/>
+
+
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+    <!-- Пакеты с расширениями .client и .shared определены в конфигурационном файле
+    .gwt.xml тегом <source> для компиляции в JavaScript-код -->
+    <source path='client'/>
+    <source path='shared'/>
+
+
+    <public path=''>
+        <include name='*.css' />
+    </public>
+
+    <stylesheet src='style.css' />
+
+    <set-configuration-property name="CssResource.enableGss" value="true"/>
+    <set-configuration-property name="CssResource.conversionMode"    value="strict" />
+</module>

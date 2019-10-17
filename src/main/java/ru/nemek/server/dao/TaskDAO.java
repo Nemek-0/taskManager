@@ -1,14 +1,27 @@
 package ru.nemek.server.dao;
 
-import ru.nemek.shared.dto.Task;
+import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public interface TaskDAO {
-    Task getById(int id);
-    void save();
-    void update();
-    void delete();
-    List<Task> getAll();
+public class TaskDAO extends BaseDAO<TaskDTO> {
+    public TaskDAO() {
+        super(TaskDTO.class);
+    }
 
+    public void saveTask (TaskDTO task){
+       this.save(task);
+    }
+
+    public ArrayList<TaskDTO> getTasks(){
+        return this.getAll();
+    }
+
+    public TaskDTO getTaskById(long id){
+        return this.get(id);
+    }
+
+    public TaskDTO saveTaskAndReturn(TaskDTO task){
+        return this.saveAndReturn(task);
+    }
 }

@@ -1,5 +1,8 @@
 package ru.nemek.client.place;
 
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
 /**
  * The central location of all name tokens for the application. All {@link ProxyPlace} classes get their tokens from
  * here. This class also makes it easy to use name tokens as a resource within UIBinder xml files.
@@ -11,13 +14,13 @@ package ru.nemek.client.place;
  */
 public class NameTokens {
     public static final String HOME = "/";
-    public static final String SECONDPAGE = "/page-2";
+    public static final String history = "history";
 
     public static String getHOME() {
         return HOME;
     }
 
-    public static String getSECONDPAGE() {
-        return SECONDPAGE;
+    public static String getHistory() {
+        return history;
     }
 }

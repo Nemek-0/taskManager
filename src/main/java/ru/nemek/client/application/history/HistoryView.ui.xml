@@ -2,11 +2,10 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:npui="urn:import:ru.nemek.client.application.ui">
-
     <g:HTMLPanel>
-        <npui:MainMenu/>
-        <g:SimplePanel ui:field="mainContentPanel"/>
+        <p>
+            history
+        </p>
     </g:HTMLPanel>
-
 
 </ui:UiBinder>
