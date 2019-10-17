@@ -8,4 +8,5 @@ interface HomeUiHandlers extends UiHandlers {
     void saveTask(String taskString, Date due);
     void updateTable();
     void addTaskInTable(long id);
+    void deleteTask(long id);
 }

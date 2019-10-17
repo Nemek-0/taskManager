@@ -24,4 +24,8 @@ public class TaskDAO extends BaseDAO<TaskDTO> {
     public TaskDTO saveTaskAndReturn(TaskDTO task){
         return this.saveAndReturn(task);
     }
+
+    public void deleteTaskById(long id){
+        this.deleteById(id);
+    }
 }
