@@ -3,6 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:npui="urn:import:ru.nemek.client.application.ui">
 
+
     <g:HTMLPanel>
         <npui:MainMenu/>
         <g:SimplePanel ui:field="mainContentPanel"/>
