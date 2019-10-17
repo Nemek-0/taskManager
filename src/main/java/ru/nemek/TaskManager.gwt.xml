@@ -25,7 +25,7 @@
     <public path=''>
         <include name='*.css' />
     </public>
-
+    <stylesheet src='bootstrap.css' />
     <stylesheet src='style.css' />
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>

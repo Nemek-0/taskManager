@@ -16,6 +16,7 @@ import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -55,7 +56,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
             @Override
             public void onSuccess(getTasksResult result) {
-            getView().updateTable(result.getTasks());
+                ArrayList<TaskDTO> tasks = result.getTasks();
+                tasks.sort(new Comparator<TaskDTO>() {
+                    @Override
+                    public int compare(TaskDTO o1, TaskDTO o2) {
+                        return o1.getDue().compareTo(o2.getDue());
+                    }
+                });
+                getView().updateTable(tasks);
             }
         });
     }

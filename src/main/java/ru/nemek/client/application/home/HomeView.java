@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -19,6 +20,7 @@ import org.gwtbootstrap3.extras.datetimepicker.client.ui.DateTimePicker;
 import ru.nemek.shared.dto.TaskDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
     interface Binder extends UiBinder<Widget, HomeView> {
@@ -45,9 +47,10 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
 
     private void initTable(){
-        final Column<TaskDTO, Boolean> checkColumn = new Column<TaskDTO, Boolean>(new CheckboxCell(true, false)) {
+        final Column<TaskDTO, Boolean> checkColumn = new Column<TaskDTO, Boolean>(new CheckboxCell()) {
             @Override
             public Boolean getValue(TaskDTO task) {
+
                 return false;
             }
         };
@@ -64,7 +67,8 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         final TextColumn<TaskDTO> dueColumn = new TextColumn<TaskDTO>() {
             @Override
             public String getValue(TaskDTO task) {
-                return task.getDue().toString();
+                //return new SimpleDateFormat("dd.MM.yyyy").format(task.getDue());
+                return task.getDue().getDate() + "." + task.getDue().getMonth() + "." + (task.getDue().getYear() + 1900);
             }
         };
         cellTable.addColumn(dueColumn, "Due");
@@ -85,6 +89,19 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
     @Override
     public void updateTable(ArrayList<TaskDTO> tasks) {
+        this.cellTable.setRowStyles(new RowStyles<TaskDTO>() {
+            @Override
+            public String getStyleNames(TaskDTO task, int i) {
+                Date date = new Date();
+                if(task.getDue().getDate() == date.getDate() && task.getDue().getMonth() == date.getMonth() && task.getDue().getYear() == date.getYear())
+                    return "success"; // если это тот же день то цвет зелёный
+                if(0 > task.getDue().compareTo(new Date()))
+                    return "danger";// если дата прошла то цвет красный
+                return "";
+            }
+        });
         this.cellTable.setRowData(tasks);
+
+        this.cellTable.getRowStyles();
     }
 }
