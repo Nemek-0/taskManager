@@ -7,7 +7,7 @@ import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 import ru.nemek.shared.dto.TaskDTO;
 
 @GenDispatch(isSecure = false, serviceName = UnsecuredActionImpl.DEFAULT_SERVICE_NAME)
-public class addTask {
+public class AddTask {
     @In(1)
     TaskDTO task;
 

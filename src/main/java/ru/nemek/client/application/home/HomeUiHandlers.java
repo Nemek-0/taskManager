@@ -5,8 +5,8 @@ import com.gwtplatform.mvp.client.UiHandlers;
 import java.util.Date;
 
 interface HomeUiHandlers extends UiHandlers {
-    void GoogleButton();
-    void addTask(String taskString, Date due);
+    void saveTask(String taskString, Date due);
     void updateTable();
-    void addTaskTable(long id);
+    void addTaskInTable(long id);
+    void deleteTask(long id);
 }

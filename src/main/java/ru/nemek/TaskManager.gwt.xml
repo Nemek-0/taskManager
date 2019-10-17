@@ -2,8 +2,12 @@
 <module rename-to='TaskManager'>
     <inherits name='com.google.gwt.user.User'/>
     <inherits name="com.google.gwt.inject.Inject"/>
+
     <inherits name='com.gwtplatform.dispatch.Dispatch'/>
     <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint"/>
+
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+    <inherits name="org.gwtbootstrap3.extras.datetimepicker.DateTimePicker"/>
 
     <!-- Тег <extend-configuration-property> с помощью атрибутов name и value расширяет значение
     ранее определенного конфигурационного свойства. -->
@@ -11,7 +15,7 @@
                                    value="ru.nemek.client.gin.ClientModule"/>
 
 
-    <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+
     <!-- Пакеты с расширениями .client и .shared определены в конфигурационном файле
     .gwt.xml тегом <source> для компиляции в JavaScript-код -->
     <source path='client'/>
@@ -21,7 +25,7 @@
     <public path=''>
         <include name='*.css' />
     </public>
-
+    <stylesheet src='bootstrap.css' />
     <stylesheet src='style.css' />
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>
