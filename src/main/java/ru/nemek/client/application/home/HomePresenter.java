@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
+import ru.nemek.client.event.ComplexEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
@@ -86,6 +87,11 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 updateTable();
             }
         });
+    }
+
+    @Override
+    public void testMethod(TaskDTO task) {
+        ComplexEvent.fire(this, task);
     }
 
     @Override
