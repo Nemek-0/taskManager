@@ -43,9 +43,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     @Override
     public void saveTask(String taskString, Date due) {
         TaskDTO task = new TaskDTO(taskString, due);
-        dispatcher.execute(new AddTaskAction(task), new AsyncCallbackImpl<AddTaskResult>() {
+        dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
             @Override
-            public void onSuccess(AddTaskResult addTaskResult) {
+            public void onSuccess(addTaskResult addTaskResult) {
                updateTable();
             }
         });
@@ -53,9 +53,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public void updateTable() {
-        dispatcher.execute(new GetTasksAction(), new AsyncCallbackImpl<GetTasksResult>() {
+        dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
             @Override
-            public void onSuccess(GetTasksResult result) {
+            public void onSuccess(getTasksResult result) {
                 ArrayList<TaskDTO> tasks = result.getTasks();
                 tasks.sort(new Comparator<TaskDTO>() {
                     @Override
@@ -70,20 +70,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public void addTaskInTable(long id){
-        dispatcher.execute(new GetTaskAction(id), new AsyncCallbackImpl<GetTaskResult>() {
+        dispatcher.execute(new getTaskAction(id), new AsyncCallbackImpl<getTaskResult>() {
             @Override
-            public void onSuccess(GetTaskResult getTaskResult) {
+            public void onSuccess(getTaskResult getTaskResult) {
                 getView().addTaskInTable(getTaskResult.getTasks());
-            }
-        });
-    }
-
-    @Override
-    public void deleteTask(long id) {
-        dispatcher.execute(new DeleteTaskAction(id), new AsyncCallbackImpl<DeleteTaskResult>() {
-            @Override
-            public void onSuccess(DeleteTaskResult deleteTaskResult) {
-                updateTable();
             }
         });
     }

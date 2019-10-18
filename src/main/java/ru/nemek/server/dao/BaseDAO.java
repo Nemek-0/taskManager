@@ -13,6 +13,7 @@ public abstract class BaseDAO<T> {
         this.clazz = clazz;
     }
 
+
     void save(T entity){
         ofy().save().entity(entity).now();
     }
@@ -22,6 +23,12 @@ public abstract class BaseDAO<T> {
     }
 
     public T get(Long id) {
+        // TODO probably it could be fixed by parameters of
+        // work around for objectify cacheing and new query not having the
+        // latest
+        // data
+        // ofy().clear();
+
         return ofy().load().type(clazz).id(id).now();
     }
 
@@ -34,11 +41,9 @@ public abstract class BaseDAO<T> {
     }
 
     T saveAndReturn(T entity) {
+        // saveNow(entity);
+        // return entity;
         return get(saveNow(entity));
-    }
-
-    public void deleteById(long id){
-        ofy().delete().entity(get(id));
     }
 
 }

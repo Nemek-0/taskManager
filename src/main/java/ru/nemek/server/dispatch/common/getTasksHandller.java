@@ -5,24 +5,25 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 import ru.nemek.server.dao.TaskDAO;
 import ru.nemek.server.dispatch.MyAbstractActionHandler;
-import ru.nemek.shared.dispatch.GetTasksAction;
-import ru.nemek.shared.dispatch.GetTasksResult;
+import ru.nemek.shared.dispatch.getTasksAction;
+import ru.nemek.shared.dispatch.getTasksResult;
 import ru.nemek.shared.dto.TaskDTO;
 
 import java.util.ArrayList;
 
 
-public class GetTasksHandller extends MyAbstractActionHandler<GetTasksAction, GetTasksResult> {
+public class getTasksHandller extends MyAbstractActionHandler<getTasksAction, getTasksResult> {
 
     @Inject
-    public GetTasksHandller() {
-        super(GetTasksAction.class);
+    public getTasksHandller() {
+        super(getTasksAction.class);
     }
 
 
     @Override
-    public GetTasksResult execute(GetTasksAction action, ExecutionContext context) throws ActionException {
+    public getTasksResult execute(getTasksAction action, ExecutionContext context) throws ActionException {
         ArrayList<TaskDTO> list =  new TaskDAO().getAll();
-        return new GetTasksResult(list);
+        System.out.println(list);
+        return new getTasksResult(list);
     }
 }

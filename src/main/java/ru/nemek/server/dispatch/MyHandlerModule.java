@@ -2,22 +2,19 @@ package ru.nemek.server.dispatch;
 
 
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
-import ru.nemek.server.dispatch.common.AddTaskHandller;
-import ru.nemek.server.dispatch.common.DeleteTaskHandller;
-import ru.nemek.server.dispatch.common.GetTaskHandller;
-import ru.nemek.server.dispatch.common.GetTasksHandller;
-import ru.nemek.shared.dispatch.AddTaskAction;
-import ru.nemek.shared.dispatch.DeleteTaskAction;
-import ru.nemek.shared.dispatch.GetTaskAction;
-import ru.nemek.shared.dispatch.GetTasksAction;
+import ru.nemek.server.dispatch.common.addTaskHandller;
+import ru.nemek.server.dispatch.common.getTaskHandller;
+import ru.nemek.server.dispatch.common.getTasksHandller;
+import ru.nemek.shared.dispatch.addTaskAction;
+import ru.nemek.shared.dispatch.getTaskAction;
+import ru.nemek.shared.dispatch.getTasksAction;
 
 public class MyHandlerModule extends HandlerModule {
     @Override
     protected void configureHandlers() {
 
-        bindHandler(AddTaskAction.class, AddTaskHandller.class);
-        bindHandler(GetTasksAction.class, GetTasksHandller.class);
-        bindHandler(GetTaskAction.class, GetTaskHandller.class);
-        bindHandler(DeleteTaskAction.class, DeleteTaskHandller.class);
+        bindHandler(addTaskAction.class, addTaskHandller.class);
+        bindHandler(getTasksAction.class, getTasksHandller.class);
+        bindHandler(getTaskAction.class, getTaskHandller.class);
     }
 }
