@@ -47,6 +47,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Inject
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+        this.taskTextBox.setTitle("[jg [tq kfktkq ");
         initTable();
     }
 
@@ -64,7 +65,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             @Override
             public void update(int i, TaskDTO task, Boolean aBoolean) {
                 if(aBoolean){
-                    getUiHandlers().deleteTask(task.getId());
+                    getUiHandlers().deleteTask(task);
                 }
             }
         });
@@ -105,8 +106,8 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         this.modal.hide();
     }
 
-    void deleteTask(long id){
-        getUiHandlers().deleteTask(id);
+    void deleteTask(TaskDTO task){
+        getUiHandlers().deleteTask(task);
     }
 
     @Override
