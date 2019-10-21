@@ -13,7 +13,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
  * Also note the exclamation mark in front of the tokens, this is used for search engine crawling support.
  */
 public class NameTokens {
-    public static final String HOME = "";
+    public static final String HOME = "/";
     public static final String history = "history";
 
     public static String getHOME() {

@@ -2,14 +2,13 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-
-    <ui:with type="ru.nemek.client.place.NameTokens" field="nameTokens"></ui:with>
+    <ui:with type="ru.nemek.client.place.NameTokens" field="nameTokens"/>
 
     <g:HTMLPanel tag="nav">
         <b:Navbar>
-            <b:NavbarCollapse >
+            <b:NavbarCollapse>
                 <b:NavbarNav>
-                    <b:AnchorListItem ui:field="anchorListItemHome" href="#{nameTokens.getHOME}">Home</b:AnchorListItem>
+                    <b:AnchorListItem ui:field="anchorListItemHome" href="{nameTokens.getHOME}#">Home</b:AnchorListItem>
                     <b:AnchorListItem ui:field="anchorListItemHistory" href="#{nameTokens.getHistory}">History</b:AnchorListItem>
                 </b:NavbarNav>
             </b:NavbarCollapse>
