@@ -31,4 +31,13 @@ public class ComplexEvent extends GwtEvent<ComplexEvent.ComplexHandler> {
     protected void dispatch(ComplexHandler handler) {
         handler.onComplexEvent(this);
     }
+
+    public TaskDTO getTask() {
+        return task;
+    }
+
+    public static Type<ComplexHandler> getType() {
+        return TYPE;
+    }
+
 }
