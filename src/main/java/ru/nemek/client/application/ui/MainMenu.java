@@ -17,9 +17,13 @@
 package ru.nemek.client.application.ui;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
 
 /**
  * A simple menu that can be reused.
@@ -27,10 +31,31 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainMenu extends Composite {
     interface MainMenuUiBinder extends UiBinder<Widget, MainMenu> {
     }
-
+    @UiField AnchorListItem anchorListItemHome;
+    @UiField AnchorListItem anchorListItemHistory;
     private static MainMenuUiBinder uiBinder = GWT.create(MainMenuUiBinder.class);
 
     public MainMenu() {
         initWidget(uiBinder.createAndBindUi(this));
+        init();
     }
+
+
+    public void init(){
+        this.anchorListItemHome.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                anchorListItemHistory.setActive(false);
+                anchorListItemHome.setActive(true);
+            }
+        });
+        this.anchorListItemHistory.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                anchorListItemHome.setActive(false);
+                anchorListItemHistory.setActive(true);
+            }
+        });
+    }
+
 }
