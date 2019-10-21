@@ -23,6 +23,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 
 /**
@@ -35,13 +36,14 @@ public class MainMenu extends Composite {
     @UiField AnchorListItem anchorListItemHistory;
     private static MainMenuUiBinder uiBinder = GWT.create(MainMenuUiBinder.class);
 
+    @Inject
     public MainMenu() {
         initWidget(uiBinder.createAndBindUi(this));
+        anchorListItemHome.setActive(true);
         init();
     }
 
-
-    public void init(){
+    private void init(){
         this.anchorListItemHome.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
