@@ -1,9 +1,7 @@
 package ru.nemek.client.application.history;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -13,20 +11,19 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.event.ComplexEvent;
-import ru.nemek.client.event.HasComplexEventHandlers;
 import ru.nemek.client.place.NameTokens;
+import ru.nemek.shared.dto.TaskDTO;
 
-public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy> implements HistoryUiHandlers, HasComplexEventHandlers {
+public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy> implements HistoryUiHandlers, ComplexEvent.ComplexHandler {
 
 
     @Override
-    public HandlerRegistration addComplexEventHandler(ComplexEvent.ComplexHandler handler, Object source) {
-        HandlerRegistration hr = getEventBus().addHandlerToSource(ComplexEvent.TYPE, source, handler);
-        registerHandler(hr);
-        return hr;
+    public void onComplexEvent(ComplexEvent event) {
+        getView().test(task.getTask());
     }
 
     interface MyView extends View, HasUiHandlers<HistoryUiHandlers> {
+        void test(String str);
     }
 
     @ProxyCodeSplit
@@ -34,22 +31,18 @@ public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, History
     interface MyProxy extends ProxyPlace<HistoryPresenter> {
     }
     PlaceManager placeManager;
+    private TaskDTO task;
 
     @Inject
-    HistoryPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager) {
+    HistoryPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, TaskDTO task) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_APPLICATION);
         this.placeManager = placeManager;
+        this.task = task;
         getView().setUiHandlers(this);
-
-    }
-    public void scan(){
-        ;
     }
 
-    @Override
-    public void fireEvent(GwtEvent<?> event) {
-        super.fireEvent(event);
-    }
+
+
 
     @Override
     protected void onReset() {

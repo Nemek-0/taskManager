@@ -80,11 +80,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void deleteTask(long id) {
-        dispatcher.execute(new DeleteTaskAction(id), new AsyncCallbackImpl<DeleteTaskResult>() {
+    public void deleteTask(TaskDTO task) {
+        dispatcher.execute(new DeleteTaskAction(task.getId()), new AsyncCallbackImpl<DeleteTaskResult>() {
             @Override
             public void onSuccess(DeleteTaskResult deleteTaskResult) {
                 updateTable();
+                testMethod(task);
             }
         });
     }
