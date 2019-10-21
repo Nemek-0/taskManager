@@ -2,7 +2,9 @@ package ru.nemek.client.application.home;
 
 
 import com.google.gwt.cell.client.CheckboxCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -31,11 +33,15 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @UiField
     Modal modal;
     @UiField
+    Modal checkModal;
+    @UiField
     TextBox taskTextBox;
     @UiField
     DateTimePicker dateTimePicker;
     @UiField
     Button saveTaskButton;
+    @UiField
+    Button deleteTaskButton;
 
 
 
@@ -47,13 +53,29 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
 
     private void initTable(){
+        CheckboxCell checkboxCell = new CheckboxCell();
+
         final Column<TaskDTO, Boolean> checkColumn = new Column<TaskDTO, Boolean>(new CheckboxCell()) {
             @Override
             public Boolean getValue(TaskDTO task) {
-
                 return false;
             }
         };
+        checkColumn.setFieldUpdater(new FieldUpdater<TaskDTO, Boolean>() {
+            @Override
+            public void update(int i, TaskDTO task, Boolean aBoolean) {
+                if(aBoolean){
+                    checkModal.show();
+                    deleteTaskButton.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent event) {
+                            checkModal.hide();
+                            getUiHandlers().deleteTask(task.getId());
+                        }
+                    });
+                }
+            }
+        });
         cellTable.addColumn(checkColumn, "Done?");
 
         final TextColumn<TaskDTO> nameTaskColumn = new TextColumn<TaskDTO>() {
@@ -72,23 +94,6 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             }
         };
         cellTable.addColumn(dueColumn, "Due");
-    }
-
-    @UiHandler("saveTaskButton")
-    public void saveTask(ClickEvent event){
-        getUiHandlers().saveTask(this.taskTextBox.getText(), this.dateTimePicker.getValue());
-        this.modal.hide();
-    }
-
-    @Override
-    public void addTaskInTable(TaskDTO task) {
-        ArrayList<TaskDTO> tasks = new ArrayList<TaskDTO>();
-        tasks.add(task);
-        this.cellTable.setRowData(tasks);
-    }
-
-    @Override
-    public void updateTable(ArrayList<TaskDTO> tasks) {
         this.cellTable.setRowStyles(new RowStyles<TaskDTO>() {
             @Override
             public String getStyleNames(TaskDTO task, int i) {
@@ -100,8 +105,24 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
                 return "";
             }
         });
-        this.cellTable.setRowData(tasks);
+    }
 
-        this.cellTable.getRowStyles();
+    @UiHandler("saveTaskButton")
+    public void saveTask(ClickEvent event){
+        getUiHandlers().saveTask(this.taskTextBox.getText(), this.dateTimePicker.getValue());
+        this.modal.hide();
+    }
+
+
+    @Override
+    public void addTaskInTable(TaskDTO task) {
+        ArrayList<TaskDTO> tasks = new ArrayList<TaskDTO>();
+        tasks.add(task);
+        this.cellTable.setRowData(tasks);
+    }
+
+    @Override
+    public void updateTable(ArrayList<TaskDTO> tasks) {
+        this.cellTable.setRowData(tasks);
     }
 }

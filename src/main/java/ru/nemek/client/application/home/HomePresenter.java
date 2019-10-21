@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
+import ru.nemek.client.event.ComplexEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
@@ -43,9 +44,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     @Override
     public void saveTask(String taskString, Date due) {
         TaskDTO task = new TaskDTO(taskString, due);
-        dispatcher.execute(new addTaskAction(task), new AsyncCallbackImpl<addTaskResult>() {
+        dispatcher.execute(new AddTaskAction(task), new AsyncCallbackImpl<AddTaskResult>() {
             @Override
-            public void onSuccess(addTaskResult addTaskResult) {
+            public void onSuccess(AddTaskResult addTaskResult) {
                updateTable();
             }
         });
@@ -53,9 +54,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public void updateTable() {
-        dispatcher.execute(new getTasksAction(), new AsyncCallbackImpl<getTasksResult>() {
+        dispatcher.execute(new GetTasksAction(), new AsyncCallbackImpl<GetTasksResult>() {
             @Override
-            public void onSuccess(getTasksResult result) {
+            public void onSuccess(GetTasksResult result) {
                 ArrayList<TaskDTO> tasks = result.getTasks();
                 tasks.sort(new Comparator<TaskDTO>() {
                     @Override
@@ -70,12 +71,27 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     @Override
     public void addTaskInTable(long id){
-        dispatcher.execute(new getTaskAction(id), new AsyncCallbackImpl<getTaskResult>() {
+        dispatcher.execute(new GetTaskAction(id), new AsyncCallbackImpl<GetTaskResult>() {
             @Override
-            public void onSuccess(getTaskResult getTaskResult) {
+            public void onSuccess(GetTaskResult getTaskResult) {
                 getView().addTaskInTable(getTaskResult.getTasks());
             }
         });
+    }
+
+    @Override
+    public void deleteTask(long id) {
+        dispatcher.execute(new DeleteTaskAction(id), new AsyncCallbackImpl<DeleteTaskResult>() {
+            @Override
+            public void onSuccess(DeleteTaskResult deleteTaskResult) {
+                updateTable();
+            }
+        });
+    }
+
+    @Override
+    public void testMethod(TaskDTO task) {
+        ComplexEvent.fire(this, task);
     }
 
     @Override

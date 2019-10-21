@@ -20,7 +20,21 @@
                 <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
             </b:ModalFooter>
         </b:Modal>
+        <b:Modal title="Потдвердите действие" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="checkModal" ui:field="checkModal">
+        <b:ModalBody>
+            <g:HTMLPanel>
+                <p>
+                    Вы действительно хотите закрыть задачу?
+                </p>
+            </g:HTMLPanel>
+        </b:ModalBody>
+        <b:ModalFooter>
+            <b:Button type="PRIMARY" ui:field="deleteTaskButton">Да</b:Button>
+            <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
+        </b:ModalFooter>
+    </b:Modal>
         <b:Button dataTarget="#modal" dataToggle="MODAL" type="PRIMARY" size="LARGE">Создать задачу</b:Button>
     </g:HTMLPanel>
+
 
 </ui:UiBinder>
