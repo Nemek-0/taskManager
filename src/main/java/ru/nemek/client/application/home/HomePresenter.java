@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
+import ru.nemek.client.event.ComplexEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
@@ -79,13 +80,19 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void deleteTask(long id) {
-        dispatcher.execute(new DeleteTaskAction(id), new AsyncCallbackImpl<DeleteTaskResult>() {
+    public void deleteTask(TaskDTO task) {
+        dispatcher.execute(new DeleteTaskAction(task.getId()), new AsyncCallbackImpl<DeleteTaskResult>() {
             @Override
             public void onSuccess(DeleteTaskResult deleteTaskResult) {
                 updateTable();
+                testMethod(task);
             }
         });
+    }
+
+    @Override
+    public void testMethod(TaskDTO task) {
+        ComplexEvent.fire(this, task);
     }
 
     @Override

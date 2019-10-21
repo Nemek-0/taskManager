@@ -4,7 +4,6 @@ package ru.nemek.client.application.home;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -48,6 +47,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Inject
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+        this.taskTextBox.setTitle("[jg [tq kfktkq ");
         initTable();
     }
 
@@ -65,14 +65,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             @Override
             public void update(int i, TaskDTO task, Boolean aBoolean) {
                 if(aBoolean){
-                    checkModal.show();
-                    deleteTaskButton.addClickHandler(new ClickHandler() {
-                        @Override
-                        public void onClick(ClickEvent event) {
-                            checkModal.hide();
-                            getUiHandlers().deleteTask(task.getId());
-                        }
-                    });
+                    getUiHandlers().deleteTask(task);
                 }
             }
         });
@@ -113,6 +106,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         this.modal.hide();
     }
 
+    void deleteTask(TaskDTO task){
+        getUiHandlers().deleteTask(task);
+    }
 
     @Override
     public void addTaskInTable(TaskDTO task) {

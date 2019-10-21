@@ -3,9 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:npui="urn:import:ru.nemek.client.application.ui">
     <g:HTMLPanel>
-        <p>
-            history
-        </p>
+        <g:TextBox ui:field="textBox"/>
     </g:HTMLPanel>
 
 </ui:UiBinder>

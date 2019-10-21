@@ -8,10 +8,13 @@
     <g:HTMLPanel>
 
         <b.gwt:CellTable ui:field="cellTable"  bordered="true" condensed="true" striped="true" hover="true"/>
-        <b:Modal title="Добавить задачу" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="modal" ui:field="modal">
+        <b:Modal title="Add task" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="modal" ui:field="modal">
             <b:ModalBody>
                 <g:HTMLPanel>
+                    <big>Enter the task</big>
                     <b:TextBox ui:field="taskTextBox"/>
+                    <p/>
+                    <big>Choose a date</big>
                     <b2:DateTimePicker ui:field="dateTimePicker" minView="MONTH" format="mm.dd.yyyy"/>
                 </g:HTMLPanel>
             </b:ModalBody>
