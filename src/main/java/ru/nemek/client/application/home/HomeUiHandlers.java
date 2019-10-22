@@ -10,5 +10,5 @@ interface HomeUiHandlers extends UiHandlers {
     void updateTable();
     void addTaskInTable(long id);
     void deleteTask(TaskDTO task);
-    void testMethod(TaskDTO task);
+    void onDeleteTaskEvent(TaskDTO task);
 }

@@ -114,7 +114,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     public void addTaskInTable(TaskDTO task) {
         ArrayList<TaskDTO> tasks = new ArrayList<TaskDTO>();
         tasks.add(task);
-        this.cellTable.setRowData(tasks);
+        this.cellTable.setRowData(this.cellTable.getRowCount(), tasks);
     }
 
     @Override

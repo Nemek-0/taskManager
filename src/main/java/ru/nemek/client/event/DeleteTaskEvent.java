@@ -5,21 +5,21 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import ru.nemek.shared.dto.TaskDTO;
 
-public class ComplexEvent extends GwtEvent<ComplexEvent.ComplexHandler> {
+public class DeleteTaskEvent extends GwtEvent<DeleteTaskEvent.ComplexHandler> {
     public interface ComplexHandler extends EventHandler {
-        void onComplexEvent(ComplexEvent event);
+        void onComplexEvent(DeleteTaskEvent event);
     }
 
     public static final Type<ComplexHandler> TYPE = new Type<>();
 
     private final TaskDTO task;
 
-    public ComplexEvent(TaskDTO task) {
+    public DeleteTaskEvent(TaskDTO task) {
         this.task = task;
     }
 
     public static void fire(HasHandlers source, TaskDTO task) {
-        source.fireEvent(new ComplexEvent(task));
+        source.fireEvent(new DeleteTaskEvent(task));
     }
 
     @Override

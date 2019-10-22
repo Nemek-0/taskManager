@@ -8,10 +8,12 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
-import ru.nemek.client.event.ComplexEvent;
+import ru.nemek.client.event.DeleteTaskEvent;
+import ru.nemek.client.event.ReturnTaskEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
@@ -21,7 +23,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 
-public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers {
+public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers, ReturnTaskEvent.ReturnTaskHandler {
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
         void addTaskInTable(TaskDTO task);
         void updateTable(ArrayList<TaskDTO> tasks);
@@ -85,14 +87,20 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             @Override
             public void onSuccess(DeleteTaskResult deleteTaskResult) {
                 updateTable();
-                testMethod(task);
+                onDeleteTaskEvent(task);
             }
         });
     }
 
     @Override
-    public void testMethod(TaskDTO task) {
-        ComplexEvent.fire(this, task);
+    public void onDeleteTaskEvent(TaskDTO task) {
+        DeleteTaskEvent.fire(this, task);
+    }
+
+    @ProxyEvent
+    @Override
+    public void onReturnTaskEvent(ReturnTaskEvent event) {
+        saveTask(event.getTask().getTask(), event.getTask().getDue());
     }
 
     @Override
