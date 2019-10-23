@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
@@ -35,11 +36,16 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @UiField
     Modal checkModal;
     @UiField
+    Form form;
+
+    @UiField
     TextBox taskTextBox;
     @UiField
     DateTimePicker dateTimePicker;
     @UiField
     Button saveTaskButton;
+    @UiField
+    Button cancelSaveTaskButton;
     @UiField
     Button deleteTaskButton;
     @UiField
@@ -49,6 +55,11 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         initTable();
+        initValitators();
+    }
+
+    private void initValitators() {
+
     }
 
     private void initTable(){
@@ -98,15 +109,18 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
     @UiHandler("saveTaskButton")
     public void saveTask(ClickEvent event){
-        TaskDTO task = createTask(taskTextBox.getText(), dateTimePicker.getValue());
-        getUiHandlers().saveTask(task);
-        this.modal.hide();
-        taskTextBox.setText("");
-        dateTimePicker.setValue(null);
+        if(form.validate()){
+            TaskDTO task = new TaskDTO(taskTextBox.getText(), dateTimePicker.getValue());
+            getUiHandlers().saveTask(task);
+            this.modal.hide();
+            taskTextBox.setText("");
+            dateTimePicker.setValue(null);
+        }
     }
 
-    private TaskDTO createTask(String text, Date value) {
-        return new TaskDTO(text, value);
+    @UiHandler("cancelSaveTaskButton")
+    public void cancelSaveTask(ClickEvent event){
+        form.reset();
     }
 
     @UiHandler("inGoogle")
@@ -117,5 +131,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void updateTable(List<TaskDTO> tasks) {
         this.cellTable.setRowData(tasks);
+    }
+
+    private TaskDTO createTask(String text, Date value) {
+        return new TaskDTO(text, value);
     }
 }
