@@ -18,15 +18,13 @@ import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.List;
 
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers, ReturnTaskEvent.ReturnTaskHandler {
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
-        void addTaskInTable(TaskDTO task);
-        void updateTable(ArrayList<TaskDTO> tasks);
+        void updateTable(List<TaskDTO> tasks);
     }
 
     @ProxyCodeSplit
@@ -44,8 +42,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void saveTask(String taskString, Date due) {
-        TaskDTO task = new TaskDTO(taskString, due);
+    public void saveTask(TaskDTO task) {
         dispatcher.execute(new AddTaskAction(task), new AsyncCallbackImpl<AddTaskResult>() {
             @Override
             public void onSuccess(AddTaskResult addTaskResult) {
@@ -59,24 +56,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new GetTasksAction(), new AsyncCallbackImpl<GetTasksResult>() {
             @Override
             public void onSuccess(GetTasksResult result) {
-                ArrayList<TaskDTO> tasks = result.getTasks();
-                tasks.sort(new Comparator<TaskDTO>() {
-                    @Override
-                    public int compare(TaskDTO o1, TaskDTO o2) {
-                        return o1.getDue().compareTo(o2.getDue());
-                    }
-                });
+                List<TaskDTO> tasks = result.getTasks();
+                tasks.sort(Comparator.comparing(TaskDTO::getDue));//Сортировка по дате
                 getView().updateTable(tasks);
-            }
-        });
-    }
-
-    @Override
-    public void addTaskInTable(long id){
-        dispatcher.execute(new GetTaskAction(id), new AsyncCallbackImpl<GetTaskResult>() {
-            @Override
-            public void onSuccess(GetTaskResult getTaskResult) {
-                getView().addTaskInTable(getTaskResult.getTasks());
             }
         });
     }
@@ -100,7 +82,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     @ProxyEvent
     @Override
     public void onReturnTaskEvent(ReturnTaskEvent event) {
-        saveTask(event.getTask().getTask(), event.getTask().getDue());
+        saveTask(event.getTask());
     }
 
     @Override

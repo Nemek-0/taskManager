@@ -5,6 +5,7 @@ import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
+import ru.nemek.server.auth.AuthServlet;
 
 public class DispatchServletModule extends ServletModule {
     @Override
@@ -13,6 +14,10 @@ public class DispatchServletModule extends ServletModule {
         serve("/" + ActionImpl.DEFAULT_SERVICE_NAME  + "*").with(DispatchServiceImpl.class);
 
         bind(ObjectifyFilter.class).in(Singleton.class);
+
+        bind(AuthServlet.class).in(Singleton.class);
+        serve("/AuthServlet").with(AuthServlet.class);//поменка какой класс будет обрабатывать переход на определенный url адрес
+
         filter("/*").through(ObjectifyFilter.class);
 
     }

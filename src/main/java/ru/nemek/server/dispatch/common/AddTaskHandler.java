@@ -9,17 +9,16 @@ import ru.nemek.shared.dispatch.AddTaskAction;
 import ru.nemek.shared.dispatch.AddTaskResult;
 import ru.nemek.shared.dto.TaskDTO;
 
-public class AddTaskHandller extends MyAbstractActionHandler<AddTaskAction, AddTaskResult> {
+public class AddTaskHandler extends MyAbstractActionHandler<AddTaskAction, AddTaskResult> {
 
     @Inject
-    public AddTaskHandller() {
+    public AddTaskHandler() {
         super(AddTaskAction.class);
     }
 
     @Override
     public AddTaskResult execute(AddTaskAction action, ExecutionContext context) throws ActionException {
-
-        TaskDTO task = new TaskDAO().saveTaskAndReturn(action.getTask());
+        TaskDTO task = new TaskDAO().saveAndReturn(action.getTask());
         return new AddTaskResult(task);
     }
 }

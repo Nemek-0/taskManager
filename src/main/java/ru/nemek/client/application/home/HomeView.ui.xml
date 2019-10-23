@@ -6,7 +6,6 @@
              xmlns:b2="urn:import:org.gwtbootstrap3.extras.datetimepicker.client.ui">
 
     <g:HTMLPanel>
-
         <b.gwt:CellTable ui:field="cellTable"  bordered="true" condensed="true" striped="true" hover="true"/>
         <b:Modal title="Add task" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="modal" ui:field="modal">
             <b:ModalBody>
@@ -15,7 +14,7 @@
                     <b:TextBox ui:field="taskTextBox"/>
                     <p/>
                     <big>Choose a date</big>
-                    <b2:DateTimePicker ui:field="dateTimePicker" minView="MONTH" format="mm.dd.yyyy"/>
+                    <b2:DateTimePicker ui:field="dateTimePicker" minView="MONTH" format="dd.mm.yyyy"/>
                 </g:HTMLPanel>
             </b:ModalBody>
             <b:ModalFooter>
@@ -24,19 +23,20 @@
             </b:ModalFooter>
         </b:Modal>
         <b:Modal title="Потдвердите действие" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="checkModal" ui:field="checkModal">
-        <b:ModalBody>
-            <g:HTMLPanel>
-                <p>
-                    Вы действительно хотите закрыть задачу?
-                </p>
-            </g:HTMLPanel>
-        </b:ModalBody>
-        <b:ModalFooter>
-            <b:Button type="PRIMARY" ui:field="deleteTaskButton">Да</b:Button>
-            <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
-        </b:ModalFooter>
-    </b:Modal>
+            <b:ModalBody>
+                <g:HTMLPanel>
+                    <p>
+                        Вы действительно хотите закрыть задачу?
+                    </p>
+                </g:HTMLPanel>
+            </b:ModalBody>
+            <b:ModalFooter>
+                <b:Button type="PRIMARY" ui:field="deleteTaskButton">Да</b:Button>
+                <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
+            </b:ModalFooter>
+        </b:Modal>
         <b:Button dataTarget="#modal" dataToggle="MODAL" type="PRIMARY" size="LARGE">Создать задачу</b:Button>
+        <b:Button ui:field="inGoogle">Авторизация, пока не работает</b:Button>
     </g:HTMLPanel>
 
 

@@ -12,10 +12,10 @@ import ru.nemek.shared.dto.TaskDTO;
 import java.util.ArrayList;
 
 
-public class GetTasksHandller extends MyAbstractActionHandler<GetTasksAction, GetTasksResult> {
+public class GetTasksHandler extends MyAbstractActionHandler<GetTasksAction, GetTasksResult> {
 
     @Inject
-    public GetTasksHandller() {
+    public GetTasksHandler() {
         super(GetTasksAction.class);
     }
 
