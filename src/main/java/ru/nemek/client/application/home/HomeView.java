@@ -3,6 +3,7 @@ package ru.nemek.client.application.home;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -18,6 +19,7 @@ import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.DateTimePicker;
 import ru.nemek.shared.dto.TaskDTO;
@@ -63,20 +65,23 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
 
     private void initTable(){
-        final Column<TaskDTO, Boolean> checkColumn = new Column<TaskDTO, Boolean>(new CheckboxCell()) {
+        final Column<TaskDTO, String> checkColumn = new Column<TaskDTO, String>(new ButtonCell()) {
             @Override
-            public Boolean getValue(TaskDTO task) {
-                return false;
+            public String getValue(TaskDTO task) {
+                return "Выполнил";
             }
         };
-        checkColumn.setFieldUpdater(new FieldUpdater<TaskDTO, Boolean>() {
+        checkColumn.setFieldUpdater(new FieldUpdater<TaskDTO, String>() {
             @Override
-            public void update(int i, TaskDTO taskDTO, Boolean aBoolean) {
-                if(aBoolean){
+            public void update(int i, TaskDTO taskDTO, String s) {
+                ButtonCell buttonCell = (ButtonCell) checkColumn.getCell();
+                if(buttonCell.isEnabled()){
+                    GWT.log("" + buttonCell.isEnabled());
                     getUiHandlers().deleteTask(taskDTO);
+                }
+                buttonCell.setEnabled(false);
             }
-        }
-    });
+        });
         cellTable.addColumn(checkColumn, "Done?");
 
         final TextColumn<TaskDTO> nameTaskColumn = new TextColumn<TaskDTO>() {
@@ -131,6 +136,12 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void updateTable(List<TaskDTO> tasks) {
         this.cellTable.setRowData(tasks);
+    }
+
+    @Override
+    public void onButtonTable() {
+        ButtonCell buttonCell = (ButtonCell) cellTable.getColumn(0).getCell();
+        buttonCell.setEnabled(true);
     }
 
     private TaskDTO createTask(String text, Date value) {
