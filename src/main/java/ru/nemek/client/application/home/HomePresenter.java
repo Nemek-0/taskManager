@@ -25,7 +25,7 @@ import java.util.List;
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers, ReturnTaskEvent.ReturnTaskHandler {
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
         void updateTable(List<TaskDTO> tasks);
-        void onButtonTable();
+        void setEnableButtonTable(boolean isEnable);
     }
 
     @ProxyCodeSplit
@@ -60,7 +60,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
                 List<TaskDTO> tasks = result.getTasks();
                 tasks.sort(Comparator.comparing(TaskDTO::getDue));//Сортировка по дате
                 getView().updateTable(tasks);
-                getView().onButtonTable();
+                getView().setEnableButtonTable(true);
             }
         });
     }

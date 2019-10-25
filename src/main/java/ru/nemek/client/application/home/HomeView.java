@@ -139,9 +139,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
 
     @Override
-    public void onButtonTable() {
+    public void setEnableButtonTable(boolean isEnable) {
         ButtonCell buttonCell = (ButtonCell) cellTable.getColumn(0).getCell();
-        buttonCell.setEnabled(true);
+        buttonCell.setEnabled(isEnable);
     }
 
     private TaskDTO createTask(String text, Date value) {
