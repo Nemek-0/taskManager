@@ -13,27 +13,27 @@ public abstract class BaseDAO<T> {
         this.clazz = clazz;
     }
 
-    void save(T entity){
+    public void save(T entity){
         ofy().save().entity(entity).now();
     }
 
     public ArrayList<T> getAll() {
-        return new ArrayList<T>(ofy().load().type(clazz).list());
+        return new ArrayList<>(ofy().load().type(clazz).list());
     }
 
     public T get(Long id) {
         return ofy().load().type(clazz).id(id).now();
     }
 
-    private T get(Key<T> key) {
+    public T get(Key<T> key) {
         return ofy().load().key(key).now();
     }
 
-    private Key<T> saveNow(T entity) {
+    public Key<T> saveNow(T entity) {
         return ofy().save().entity(entity).now();
     }
 
-    T saveAndReturn(T entity) {
+    public T saveAndReturn(T entity) {
         return get(saveNow(entity));
     }
 

@@ -9,15 +9,14 @@ import ru.nemek.shared.dispatch.DeleteTaskAction;
 import ru.nemek.shared.dispatch.DeleteTaskResult;
 
 
-public class DeleteTaskHandller extends MyAbstractActionHandler<DeleteTaskAction, DeleteTaskResult> {
+public class DeleteTaskHandler extends MyAbstractActionHandler<DeleteTaskAction, DeleteTaskResult> {
     @Inject
-    public DeleteTaskHandller() {
+    public DeleteTaskHandler() {
         super(DeleteTaskAction.class);
     }
 
     @Override
     public DeleteTaskResult execute(DeleteTaskAction deleteTaskAction, ExecutionContext executionContext) throws ActionException {
-        System.out.println(deleteTaskAction.getId());
         new TaskDAO().deleteById(deleteTaskAction.getId());
         return new DeleteTaskResult();
     }

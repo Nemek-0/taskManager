@@ -6,37 +6,44 @@
              xmlns:b2="urn:import:org.gwtbootstrap3.extras.datetimepicker.client.ui">
 
     <g:HTMLPanel>
-
         <b.gwt:CellTable ui:field="cellTable"  bordered="true" condensed="true" striped="true" hover="true"/>
-        <b:Modal title="Add task" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="modal" ui:field="modal">
+        <b:Form ui:field="form" submitOnEnter="true">
+        <b:Modal title="Add task" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="modal" ui:field="modal">
             <b:ModalBody>
                 <g:HTMLPanel>
-                    <big>Enter the task</big>
-                    <b:TextBox ui:field="taskTextBox"/>
-                    <p/>
-                    <big>Choose a date</big>
-                    <b2:DateTimePicker ui:field="dateTimePicker" minView="MONTH" format="mm.dd.yyyy"/>
+                    <b:FormGroup>
+                        <b:FormLabel for="taskTextBox" >Enter the task</b:FormLabel>
+                        <b:InlineHelpBlock iconType="EXCLAMATION_TRIANGLE" />
+                        <b:TextBox ui:field="taskTextBox" b:id="taskTextBox" allowBlank="false" />
+                    </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="dateTimePicker">Choose a date</b:FormLabel>
+                        <b:InlineHelpBlock iconType="EXCLAMATION_TRIANGLE" />
+                        <b2:DateTimePicker ui:field="dateTimePicker" minView="MONTH" format="dd.mm.yyyy" b:id="dateTimePicker" allowBlank="false" />
+                    </b:FormGroup>
                 </g:HTMLPanel>
             </b:ModalBody>
             <b:ModalFooter>
                 <b:Button type="PRIMARY" ui:field="saveTaskButton">Сохранить</b:Button>
-                <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
+                <b:Button type="DANGER" dataDismiss="MODAL" ui:field="cancelSaveTaskButton">Отмена</b:Button>
             </b:ModalFooter>
         </b:Modal>
+        </b:Form>
         <b:Modal title="Потдвердите действие" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="checkModal" ui:field="checkModal">
-        <b:ModalBody>
-            <g:HTMLPanel>
-                <p>
-                    Вы действительно хотите закрыть задачу?
-                </p>
-            </g:HTMLPanel>
-        </b:ModalBody>
-        <b:ModalFooter>
-            <b:Button type="PRIMARY" ui:field="deleteTaskButton">Да</b:Button>
-            <b:Button type="DANGER" dataDismiss="MODAL">Отмена</b:Button>
-        </b:ModalFooter>
-    </b:Modal>
+            <b:ModalBody>
+                <g:HTMLPanel>
+                    <p>
+                        Вы действительно хотите закрыть задачу?
+                    </p>
+                </g:HTMLPanel>
+            </b:ModalBody>
+            <b:ModalFooter>
+                <b:Button type="PRIMARY" ui:field="deleteTaskButton">Да</b:Button>
+                <b:Button type="DANGER"  dataDismiss="MODAL">Отмена</b:Button>
+            </b:ModalFooter>
+        </b:Modal>
         <b:Button dataTarget="#modal" dataToggle="MODAL" type="PRIMARY" size="LARGE">Создать задачу</b:Button>
+        <b:Button ui:field="inGoogle">Авторизация, пока не работает</b:Button>
     </g:HTMLPanel>
 
 

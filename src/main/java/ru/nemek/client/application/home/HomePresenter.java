@@ -8,23 +8,24 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
 import ru.nemek.client.dispatch.AsyncCallbackImpl;
-import ru.nemek.client.event.ComplexEvent;
+import ru.nemek.client.event.DeleteTaskEvent;
+import ru.nemek.client.event.ReturnTaskEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dispatch.*;
 import ru.nemek.shared.dto.TaskDTO;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.List;
 
 
-public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers {
+public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers, ReturnTaskEvent.ReturnTaskHandler {
     interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
-        void addTaskInTable(TaskDTO task);
-        void updateTable(ArrayList<TaskDTO> tasks);
+        void updateTable(List<TaskDTO> tasks);
+        void setEnableButtonTable(boolean isEnable);
     }
 
     @ProxyCodeSplit
@@ -42,8 +43,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
 
     @Override
-    public void saveTask(String taskString, Date due) {
-        TaskDTO task = new TaskDTO(taskString, due);
+    public void saveTask(TaskDTO task) {
         dispatcher.execute(new AddTaskAction(task), new AsyncCallbackImpl<AddTaskResult>() {
             @Override
             public void onSuccess(AddTaskResult addTaskResult) {
@@ -57,24 +57,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         dispatcher.execute(new GetTasksAction(), new AsyncCallbackImpl<GetTasksResult>() {
             @Override
             public void onSuccess(GetTasksResult result) {
-                ArrayList<TaskDTO> tasks = result.getTasks();
-                tasks.sort(new Comparator<TaskDTO>() {
-                    @Override
-                    public int compare(TaskDTO o1, TaskDTO o2) {
-                        return o1.getDue().compareTo(o2.getDue());
-                    }
-                });
+                List<TaskDTO> tasks = result.getTasks();
+                tasks.sort(Comparator.comparing(TaskDTO::getDue));//Сортировка по дате
                 getView().updateTable(tasks);
-            }
-        });
-    }
-
-    @Override
-    public void addTaskInTable(long id){
-        dispatcher.execute(new GetTaskAction(id), new AsyncCallbackImpl<GetTaskResult>() {
-            @Override
-            public void onSuccess(GetTaskResult getTaskResult) {
-                getView().addTaskInTable(getTaskResult.getTasks());
+                getView().setEnableButtonTable(true);
             }
         });
     }
@@ -85,14 +71,20 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             @Override
             public void onSuccess(DeleteTaskResult deleteTaskResult) {
                 updateTable();
-                testMethod(task);
+                onDeleteTaskEvent(task);
             }
         });
     }
 
     @Override
-    public void testMethod(TaskDTO task) {
-        ComplexEvent.fire(this, task);
+    public void onDeleteTaskEvent(TaskDTO task) {
+        DeleteTaskEvent.fire(this, task);
+    }
+
+    @ProxyEvent
+    @Override
+    public void onReturnTaskEvent(ReturnTaskEvent event) {
+        saveTask(event.getTask());
     }
 
     @Override

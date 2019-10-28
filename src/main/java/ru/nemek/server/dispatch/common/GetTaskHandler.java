@@ -8,9 +8,9 @@ import ru.nemek.server.dispatch.MyAbstractActionHandler;
 import ru.nemek.shared.dispatch.GetTaskAction;
 import ru.nemek.shared.dispatch.GetTaskResult;
 
-public class GetTaskHandller extends MyAbstractActionHandler<GetTaskAction, GetTaskResult> {
+public class GetTaskHandler extends MyAbstractActionHandler<GetTaskAction, GetTaskResult> {
     @Inject
-    public GetTaskHandller() {
+    public GetTaskHandler() {
         super(GetTaskAction.class);
     }
 

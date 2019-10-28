@@ -7,42 +7,49 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import ru.nemek.client.application.ApplicationPresenter;
-import ru.nemek.client.event.ComplexEvent;
+import ru.nemek.client.event.DeleteTaskEvent;
+import ru.nemek.client.event.ReturnTaskEvent;
 import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dto.TaskDTO;
 
-public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy> implements HistoryUiHandlers, ComplexEvent.ComplexHandler {
+import java.util.ArrayList;
 
-
-    @Override
-    public void onComplexEvent(ComplexEvent event) {
-        getView().test(task.getTask());
-    }
+public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy> implements HistoryUiHandlers,
+        DeleteTaskEvent.ComplexHandler
+{
 
     interface MyView extends View, HasUiHandlers<HistoryUiHandlers> {
-        void test(String str);
+        void UpdateTable(ArrayList<TaskDTO> list);
+        void addTaskInTable(TaskDTO task);
     }
 
     @ProxyCodeSplit
     @NameToken(NameTokens.history)
     interface MyProxy extends ProxyPlace<HistoryPresenter> {
     }
-    PlaceManager placeManager;
-    private TaskDTO task;
+    private PlaceManager placeManager;
 
     @Inject
     HistoryPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, TaskDTO task) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_APPLICATION);
         this.placeManager = placeManager;
-        this.task = task;
         getView().setUiHandlers(this);
     }
 
+    @ProxyEvent
+    @Override
+    public void onComplexEvent(DeleteTaskEvent event) {
+        getView().addTaskInTable(event.getTask());
+    }
 
-
+    @Override
+    public void returnTask(TaskDTO task) {
+        ReturnTaskEvent.fire(this, task);
+    }
 
     @Override
     protected void onReset() {
