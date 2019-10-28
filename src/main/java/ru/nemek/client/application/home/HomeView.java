@@ -13,6 +13,7 @@ import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.Button;
@@ -53,15 +54,12 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @UiField
     Button inGoogle;
 
+    ListDataProvider<TaskDTO> listDataProvider = new ListDataProvider<>();
+
     @Inject
     HomeView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         initTable();
-        initValitators();
-    }
-
-    private void initValitators() {
-
     }
 
     private void initTable(){
@@ -76,7 +74,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
             public void update(int i, TaskDTO taskDTO, String s) {
                 ButtonCell buttonCell = (ButtonCell) checkColumn.getCell();
                 if(buttonCell.isEnabled()){
-                    GWT.log("" + buttonCell.isEnabled());
+                    listDataProvider.getList().remove(taskDTO);
                     getUiHandlers().deleteTask(taskDTO);
                 }
                 buttonCell.setEnabled(false);
@@ -110,6 +108,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
                 return "";
             }
         });
+        listDataProvider.addDataDisplay(cellTable);
     }
 
     @UiHandler("saveTaskButton")
@@ -135,7 +134,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 
     @Override
     public void updateTable(List<TaskDTO> tasks) {
-        this.cellTable.setRowData(tasks);
+        listDataProvider.setList(tasks);
     }
 
     @Override
