@@ -6,6 +6,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
@@ -13,6 +14,7 @@ import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HistoryView extends ViewWithUiHandlers<HistoryUiHandlers> implements HistoryPresenter.MyView {
@@ -21,11 +23,10 @@ public class HistoryView extends ViewWithUiHandlers<HistoryUiHandlers> implement
     interface Binder extends UiBinder<Widget, HistoryView> {
     }
 
-
     @UiField
     CellTable<TaskDTO> cellTable;
 
-    private ArrayList<TaskDTO> tasks = new ArrayList<>();
+    private ListDataProvider<TaskDTO> listDataProvider = new ListDataProvider<>();
 
     @Inject
     HistoryView(Binder uiBinder) {
@@ -62,21 +63,23 @@ public class HistoryView extends ViewWithUiHandlers<HistoryUiHandlers> implement
             @Override
             public void update(int i, TaskDTO taskDTO, String s) {
                 getUiHandlers().returnTask(taskDTO);
-                tasks.remove(i);
-                UpdateTable(tasks);
+                listDataProvider.getList().remove(taskDTO);
+                updateTable(listDataProvider.getList());
             }
         });
         cellTable.addColumn(buttonColumn, "Return");
+        listDataProvider.addDataDisplay(cellTable);
     }
 
     @Override
-    public void UpdateTable(ArrayList<TaskDTO> list) {
-        this.cellTable.setRowData(list);
+    public void updateTable(List<TaskDTO> list) {
+        listDataProvider.setList(list);
     }
 
     @Override
     public void addTaskInTable(TaskDTO task) {
-        this.tasks.add(task);
-        UpdateTable(tasks);
+        listDataProvider.getList().add(task);
+
+        updateTable(listDataProvider.getList());
     }
 }

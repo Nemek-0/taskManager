@@ -17,13 +17,14 @@ import ru.nemek.client.place.NameTokens;
 import ru.nemek.shared.dto.TaskDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryPresenter extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy> implements HistoryUiHandlers,
         DeleteTaskEvent.ComplexHandler
 {
 
     interface MyView extends View, HasUiHandlers<HistoryUiHandlers> {
-        void UpdateTable(ArrayList<TaskDTO> list);
+        void updateTable(List<TaskDTO> list);
         void addTaskInTable(TaskDTO task);
     }
 
