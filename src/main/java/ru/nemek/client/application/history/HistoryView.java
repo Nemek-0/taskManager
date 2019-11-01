@@ -13,7 +13,6 @@ import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import ru.nemek.shared.dto.TaskDTO;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -79,7 +78,6 @@ public class HistoryView extends ViewWithUiHandlers<HistoryUiHandlers> implement
     @Override
     public void addTaskInTable(TaskDTO task) {
         listDataProvider.getList().add(task);
-
         updateTable(listDataProvider.getList());
     }
 }

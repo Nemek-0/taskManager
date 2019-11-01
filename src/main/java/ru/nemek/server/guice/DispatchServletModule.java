@@ -5,6 +5,7 @@ import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
+import ru.nemek.server.auth.Auth2callback;
 import ru.nemek.server.auth.AuthServlet;
 
 public class DispatchServletModule extends ServletModule {
@@ -18,6 +19,8 @@ public class DispatchServletModule extends ServletModule {
         bind(AuthServlet.class).in(Singleton.class);
         serve("/AuthServlet").with(AuthServlet.class);//поменка какой класс будет обрабатывать переход на определенный url адрес
 
+        bind(Auth2callback.class).in(Singleton.class); //регестрирую сервлет
+        serve("/oauth2callback").with(Auth2callback.class);
         filter("/*").through(ObjectifyFilter.class);
 
     }
