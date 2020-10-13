@@ -25,7 +25,7 @@
     <javax.validation.version>1.0.0.GA</javax.validation.version>
 
     <!-- testing -->
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13.1</junit.version>
     <jukito.version>1.4.1</jukito.version>
 
     <!-- maven -->
